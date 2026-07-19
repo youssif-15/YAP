@@ -1,0 +1,182 @@
+.block-button,
+
+.unblock-button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:10px 16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.block-button{
+
+    background:#ef4444;
+
+    color:#fff;
+
+}
+
+.block-button:hover{
+
+    background:#dc2626;
+
+}
+
+.unblock-button{
+
+    background:#374151;
+
+    color:#fff;
+
+}
+
+.unblock-button:hover{
+
+    background:#4b5563;
+
+}
+
+.block-button:disabled,
+
+.unblock-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+.block-modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.28);
+    backdrop-filter:blur(8px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    animation:fadeIn .2s ease;
+}
+
+.block-modal{
+    width:430px;
+    max-width:calc(100% - 32px);
+    background:#ffffff;
+    border:1px solid #dbeafe;
+    border-radius:22px;
+    padding:28px;
+    text-align:center;
+    animation:popup .22s ease;
+    box-shadow:0 25px 70px rgba(59,130,246,.15);
+}
+
+.block-modal-icon{
+    width:68px;
+    height:68px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.block-modal h3{
+    margin:0;
+    font-size:23px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.block-modal p{
+    margin:14px 0 0;
+    color:#64748b;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.block-modal strong{
+    color:#2563eb;
+    font-weight:700;
+}
+
+.block-modal-actions{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+}
+
+.block-modal-actions button{
+    flex:1;
+    border:none;
+    border-radius:14px;
+    padding:13px 16px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.block-modal-cancel{
+    background:#eff6ff;
+    color:#2563eb;
+    border:1px solid #bfdbfe;
+}
+
+.block-modal-cancel:hover{
+    background:#dbeafe;
+}
+
+.block-modal-confirm{
+    background:#ef4444;
+    color:#fff;
+}
+
+.block-modal-confirm:hover{
+    background:#dc2626;
+    transform:translateY(-1px);
+}
+
+.block-modal-confirm:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:translateY(14px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}

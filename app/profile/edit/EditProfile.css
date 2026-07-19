@@ -1,0 +1,397 @@
+/* =========================
+   EDIT PROFILE PAGE
+========================= */
+
+.edit-profile-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:40px 20px;
+
+    background:#f9fafb;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+
+.edit-profile-card{
+
+    width:100%;
+
+    max-width:600px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:
+
+        0 10px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+.edit-profile-card h2{
+
+    margin:0 0 25px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#111827;
+
+}
+
+
+
+
+
+/* =========================
+   AVATAR
+========================= */
+
+
+.edit-avatar-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.edit-avatar{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #e5e7eb;
+
+}
+
+
+
+.edit-avatar-placeholder{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:#e5e7eb;
+
+}
+
+
+
+.change-photo-button{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:9px 18px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.change-photo-button:hover{
+
+    opacity:.85;
+
+}
+
+
+
+
+
+/* =========================
+   FORM
+========================= */
+
+
+.edit-profile-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+
+.edit-profile-form label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#374151;
+
+    margin-top:8px;
+
+}
+
+
+
+.edit-profile-form input,
+
+.edit-profile-form textarea{
+
+    width:100%;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:10px;
+
+    padding:11px 14px;
+
+    font-size:14px;
+
+    outline:none;
+
+    background:white;
+
+    color:#111827;
+
+    transition:.25s;
+
+}
+
+
+
+.edit-profile-form textarea{
+
+    resize:none;
+
+}
+
+
+
+.edit-profile-form input:focus,
+
+.edit-profile-form textarea:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+
+        0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+
+.edit-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:25px;
+
+}
+
+
+
+.cancel-button,
+
+.save-button{
+
+    flex:1;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:10px 16px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+
+
+
+
+.cancel-button{
+
+    background:#f5f5f5;
+
+    color:#111827;
+
+}
+
+
+
+.cancel-button:hover{
+
+    background:#e5e7eb;
+
+}
+
+
+
+
+
+.save-button{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.save-button:hover{
+
+    opacity:.85;
+
+}
+
+
+
+.save-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+
+
+
+
+/* =========================
+   ERROR
+========================= */
+
+
+.edit-error{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    margin-top:10px;
+
+}
+
+
+
+
+
+/* =========================
+   LOADING
+========================= */
+
+
+.edit-profile-loading{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#6b7280;
+
+    font-size:18px;
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:600px){
+
+
+    .edit-profile-page{
+
+        padding:20px 12px;
+
+    }
+
+
+    .edit-profile-card{
+
+        padding:22px;
+
+    }
+
+
+    .edit-buttons{
+
+        flex-direction:column;
+
+    }
+
+
+}
