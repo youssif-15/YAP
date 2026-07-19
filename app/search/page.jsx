@@ -7,7 +7,9 @@ import {
 
     useState,
 
-    useRef
+    useRef,
+
+    Suspense
 
 } from "react";
 
@@ -37,7 +39,7 @@ import "./search.css";
 
 
 
-export default function SearchPage(){
+function SearchContent(){
 
 
 
@@ -79,7 +81,6 @@ export default function SearchPage(){
 
 
 
-
     useEffect(()=>{
 
 
@@ -100,7 +101,6 @@ export default function SearchPage(){
 
 
     },[]);
-
 
 
 
@@ -130,7 +130,6 @@ export default function SearchPage(){
 
 
     },[searchParams]);
-
 
 
 
@@ -212,7 +211,6 @@ export default function SearchPage(){
 
 
 
-
     async function searchUsers(value=query){
 
 
@@ -230,6 +228,7 @@ export default function SearchPage(){
 
 
         }
+
 
 
 
@@ -318,7 +317,6 @@ export default function SearchPage(){
 
 
 
-
         const filtered = (data || [])
 
         .filter(user =>
@@ -341,16 +339,7 @@ export default function SearchPage(){
 
 
     }
-
-
-
-
-
-
-
-
-
-    async function loadSuggestedUsers(userId){
+        async function loadSuggestedUsers(userId){
 
 
 
@@ -397,13 +386,12 @@ export default function SearchPage(){
 
 
 
+
         setFollowingUsers(
 
             followingIds
 
         );
-
-
 
 
 
@@ -489,6 +477,7 @@ export default function SearchPage(){
 
 
 
+
     async function followUser(id){
 
 
@@ -508,9 +497,11 @@ export default function SearchPage(){
 
 
 
+
         const alreadyFollow =
 
         followingUsers.includes(id);
+
 
 
 
@@ -591,6 +582,7 @@ export default function SearchPage(){
 
             setFollowingUsers(prev=>
 
+
                 prev.filter(
 
                     userId=>
@@ -600,6 +592,7 @@ export default function SearchPage(){
                 )
 
             );
+
 
 
 
@@ -694,7 +687,17 @@ export default function SearchPage(){
 
 
     }
-        async function loadSuggestedPosts(userId){
+
+
+
+
+
+
+
+
+
+
+    async function loadSuggestedPosts(userId){
 
 
 
@@ -891,16 +894,7 @@ export default function SearchPage(){
 
 
     }
-
-
-
-
-
-
-
-
-
-    return(
+        return(
 
 
 
@@ -965,8 +959,16 @@ export default function SearchPage(){
 
 
             </div>
-                        {
 
+
+
+
+
+
+
+
+
+            {
 
             searchResults.length > 0 &&
 
@@ -980,6 +982,8 @@ export default function SearchPage(){
                     Results
 
                 </h2>
+
+
 
 
 
@@ -1020,6 +1024,7 @@ export default function SearchPage(){
 
 
 
+
                         <img
 
 
@@ -1030,6 +1035,7 @@ export default function SearchPage(){
 
 
                         />
+
 
 
 
@@ -1105,8 +1111,10 @@ export default function SearchPage(){
 
 
 
-                {
 
+
+
+                {
 
                 suggestedUsers.map(user=>(
 
@@ -1290,7 +1298,16 @@ export default function SearchPage(){
 
 
             </section>
-                        <section>
+
+
+
+
+
+
+
+
+
+            <section>
 
 
                 <h2>
@@ -1305,7 +1322,11 @@ export default function SearchPage(){
 
 
 
+
+
                 <div className="suggested-posts-list">
+
+
 
 
 
@@ -1348,6 +1369,8 @@ export default function SearchPage(){
 
 
 
+
+
                 </div>
 
 
@@ -1368,6 +1391,41 @@ export default function SearchPage(){
 
     );
 
+
+
+}
+
+
+
+
+
+
+
+
+export default function SearchPage(){
+
+
+    return(
+
+
+        <Suspense fallback={
+
+            <div>
+
+                Loading...
+
+            </div>
+
+        }>
+
+
+            <SearchContent />
+
+
+        </Suspense>
+
+
+    );
 
 
 }
