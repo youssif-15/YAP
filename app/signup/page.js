@@ -332,31 +332,23 @@ export default function Signup() {
 
             await supabase.auth.signUp({
 
-
-
                 email,
 
                 password,
 
-
-
                 options:{
 
+                    emailRedirectTo: window.location.origin,
 
                     data:{
-
 
                         username,
 
                         full_name:fullname
 
-
                     }
 
-
                 }
-
-
 
             });
 
