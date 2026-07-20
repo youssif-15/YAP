@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134355413466",
+    "project_id": "itsyap-8804e",
+    "storage_bucket": "itsyap-8804e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134355413466:android:37cf02978d886cf71d38e3",
+        "android_client_info": {
+          "package_name": "com.yap.social"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxEYy7Mia29BC33Myd0DNiU_GMB78jSYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

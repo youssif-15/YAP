@@ -43,6 +43,13 @@ import PostLikes from "./PostLikes";
 import Comments from "@/components/Comment/Comments";
 
 
+import {
+    getYoutubeEmbed,
+    removeYoutubeLink
+} from "@/lib/getYoutubeEmbed";
+
+
+
 
 
 
@@ -106,6 +113,7 @@ export default function Post({
 
 
     }
+
 
 
 
@@ -187,13 +195,11 @@ export default function Post({
     useEffect(()=>{
 
 
-
         setSaved(
 
             !!post.saved
 
         );
-
 
 
     },[post.saved]);
@@ -232,6 +238,13 @@ export default function Post({
 
 
 
+    const youtubeEmbed = getYoutubeEmbed(currentCaption);
+
+
+
+
+
+
 
 
 
@@ -262,10 +275,11 @@ export default function Post({
 
             router.push(
 
+
                 `/profile/${username}`
 
-            );
 
+            );
 
 
         }
@@ -273,7 +287,7 @@ export default function Post({
 
 
     }
-        useEffect(()=>{
+    useEffect(()=>{
 
 
         if(openComments){
@@ -303,7 +317,9 @@ export default function Post({
 
             setCommentsKey(prev=>
 
+
                 prev+1
+
 
             );
 
@@ -335,7 +351,9 @@ export default function Post({
 
                 clearTimeout(
 
+
                     closeTimer.current
+
 
                 );
 
@@ -403,6 +421,7 @@ export default function Post({
 
 
 
+
     const canEditCaption =
 
 
@@ -420,6 +439,7 @@ export default function Post({
 
 
         !hasEdited;
+
 
 
 
@@ -467,9 +487,7 @@ export default function Post({
                 const {
 
 
-
                     error
-
 
 
                 } = await supabase
@@ -549,6 +567,7 @@ export default function Post({
 
 
 
+
                 if(onUnsave){
 
 
@@ -569,6 +588,8 @@ export default function Post({
 
 
 
+
+
             else{
 
 
@@ -576,9 +597,7 @@ export default function Post({
                 const {
 
 
-
                     error
-
 
 
                 } = await supabase
@@ -677,6 +696,9 @@ export default function Post({
 
 
 
+
+
+
     async function saveCaption(){
 
 
@@ -695,12 +717,12 @@ export default function Post({
 
 
 
+
+
         const {
 
 
-
             error
-
 
 
         } = await supabase
@@ -745,6 +767,7 @@ export default function Post({
 
 
 
+
         if(error){
 
 
@@ -774,6 +797,7 @@ export default function Post({
 
 
 
+
         setCurrentCaption(
 
 
@@ -795,7 +819,10 @@ export default function Post({
 
 
 
+
         post.edited = true;
+
+
 
 
 
@@ -819,6 +846,7 @@ export default function Post({
 
 
 
+
     async function deletePost(){
 
 
@@ -826,9 +854,7 @@ export default function Post({
         const {
 
 
-
             error
-
 
 
         } = await supabase
@@ -1013,6 +1039,7 @@ export default function Post({
 
 
 
+
                 setShared(true);
 
 
@@ -1072,6 +1099,8 @@ export default function Post({
 
 
     }
+
+
 
 
 
@@ -1186,6 +1215,7 @@ export default function Post({
 
 
 
+
     return(
 
 
@@ -1196,7 +1226,11 @@ export default function Post({
 
 
 
+
+
         <div className="post-header">
+
+
 
 
 
@@ -1227,6 +1261,7 @@ export default function Post({
 
 
             >
+
 
 
 
@@ -1283,7 +1318,13 @@ export default function Post({
 
 
 
+
+
+
+
                 <div>
+
+
 
 
 
@@ -1297,7 +1338,11 @@ export default function Post({
 
 
 
+
+
                         <span>
+
+
 
 
 
@@ -1333,7 +1378,13 @@ export default function Post({
 
 
 
+
+
                             }
+
+
+
+
 
 
 
@@ -1353,7 +1404,11 @@ export default function Post({
 
 
 
+
+
                             <OwnerBadge/>
+
+
 
 
 
@@ -1367,7 +1422,11 @@ export default function Post({
 
 
 
+
+
                         </span>
+
+
 
 
 
@@ -1407,7 +1466,12 @@ export default function Post({
 
 
             </div>
-            
+
+
+
+
+
+
 
 
 
@@ -1415,6 +1479,8 @@ export default function Post({
 
 
             <div className="post-menu">
+
+
 
 
 
@@ -1444,6 +1510,7 @@ export default function Post({
 
 
 
+
                 {
 
 
@@ -1454,7 +1521,11 @@ export default function Post({
 
 
 
+
+
                 <div className="post-dropdown">
+
+
 
 
 
@@ -1472,7 +1543,10 @@ export default function Post({
 
 
 
+
                     ?
+
+
 
 
 
@@ -1487,11 +1561,16 @@ export default function Post({
 
 
 
+
+
+
                         {
 
 
 
                         canEditCaption &&
+
+
 
 
 
@@ -1523,13 +1602,17 @@ export default function Post({
 
 
 
+
                             <Pencil size={15}/>
 
 
 
 
 
+
                             Edit caption
+
+
 
 
 
@@ -1544,6 +1627,11 @@ export default function Post({
 
 
                         }
+
+
+
+
+
 
 
 
@@ -1596,6 +1684,10 @@ export default function Post({
 
 
 
+
+
+
+
                         <button
 
 
@@ -1625,6 +1717,7 @@ export default function Post({
 
 
                             <ShieldCheck size={15}/>
+
 
 
 
@@ -1678,7 +1771,12 @@ export default function Post({
 
 
 
+
+
                         </button>
+
+
+
 
 
 
@@ -1697,6 +1795,8 @@ export default function Post({
 
 
                     :
+
+
 
 
 
@@ -1766,12 +1866,7 @@ export default function Post({
 
 
         </div>
-
-
-
-
-
-
+        
 
 
 
@@ -1796,7 +1891,12 @@ export default function Post({
 
 
 
+
+
         <div className="caption-edit-box">
+
+
+
 
 
 
@@ -1817,6 +1917,7 @@ export default function Post({
 
 
                 dir={getTextDirection(caption)}
+
 
 
 
@@ -1844,6 +1945,8 @@ export default function Post({
 
 
 
+
+
             />
 
 
@@ -1852,7 +1955,10 @@ export default function Post({
 
 
 
+
+
             <div className="caption-edit-actions">
+
 
 
 
@@ -1884,6 +1990,7 @@ export default function Post({
 
 
                 </button>
+
 
 
 
@@ -1943,7 +2050,9 @@ export default function Post({
 
 
 
+
         </div>
+
 
 
 
@@ -1960,7 +2069,11 @@ export default function Post({
 
 
 
+
+
         currentCaption &&
+
+
 
 
 
@@ -1972,11 +2085,16 @@ export default function Post({
 
 
 
+
+
             className="post-caption"
 
 
 
+
+
             dir={getTextDirection(currentCaption)}
+
 
 
 
@@ -1989,7 +2107,11 @@ export default function Post({
 
 
 
-            {currentCaption}
+
+
+            {removeYoutubeLink(currentCaption)}
+
+
 
 
 
@@ -2012,6 +2134,13 @@ export default function Post({
 
 
 
+
+
+
+
+
+
+
         <PostMedia
 
             media={post.media}
@@ -2028,7 +2157,77 @@ export default function Post({
 
 
 
+        {
+
+
+
+        youtubeEmbed &&
+
+
+
+
+
+
+
+        <div className="youtube-container">
+
+
+
+
+
+
+            <iframe
+
+
+
+                src={youtubeEmbed}
+
+
+
+                title="YouTube video"
+
+
+
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+
+
+
+                allowFullScreen
+
+
+
+            />
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         <div className="post-actions">
+
+
 
 
 
@@ -2040,11 +2239,15 @@ export default function Post({
 
 
 
+
+
                 <PostLikes
 
                     postId={post.id}
 
                 />
+
+
 
 
 
@@ -2078,7 +2281,11 @@ export default function Post({
 
 
 
+
+
                     onClick={toggleComments}
+
+
 
 
 
@@ -2090,13 +2297,22 @@ export default function Post({
 
 
 
+
+
                     <MessageCircle size={21}/>
 
 
 
 
 
+
+
                 </button>
+
+
+
+
+
 
 
 
@@ -2120,7 +2336,11 @@ export default function Post({
 
 
 
+
+
                 >
+
+
 
 
 
@@ -2132,7 +2352,14 @@ export default function Post({
 
 
 
+
+
                 </button>
+
+
+
+
+
 
 
 
@@ -2152,7 +2379,11 @@ export default function Post({
 
 
 
+
+
                 <span className="share-message">
+
+
 
 
 
@@ -2168,6 +2399,8 @@ export default function Post({
 
 
 
+
+
                 }
 
 
@@ -2175,7 +2408,14 @@ export default function Post({
 
 
 
+
             </div>
+
+
+
+
+
+
 
 
 
@@ -2205,7 +2445,13 @@ export default function Post({
 
 
 
+
+
+
+
                 }
+
+
 
 
 
@@ -2217,13 +2463,21 @@ export default function Post({
 
 
 
+
+
                 disabled={saving}
 
 
 
 
 
+
+
             >
+
+
+
+
 
 
 
@@ -2275,6 +2529,10 @@ export default function Post({
 
 
 
+
+
+
+
             </button>
 
 
@@ -2284,10 +2542,7 @@ export default function Post({
 
 
         </div>
-
-
-
-
+        
 
 
 
@@ -2304,6 +2559,9 @@ export default function Post({
 
 
         (showComments || commentsClosing) &&
+
+
+
 
 
 
@@ -2345,7 +2603,10 @@ export default function Post({
 
 
 
+
+
         >
+
 
 
 
@@ -2358,7 +2619,11 @@ export default function Post({
 
 
 
+
+
                 key={commentsKey}
+
+
 
 
 
@@ -2370,13 +2635,21 @@ export default function Post({
 
 
 
+
+
                 canManage={manageComments}
 
 
 
 
 
+
+
             />
+
+
+
+
 
 
 
@@ -2391,7 +2664,9 @@ export default function Post({
 
 
 
+
         }
+
 
 
 
@@ -2418,7 +2693,13 @@ export default function Post({
 
 
 
+
+
+
+
         <div className="delete-popup-overlay">
+
+
 
 
 
@@ -2431,13 +2712,20 @@ export default function Post({
 
 
 
+
+
+
                 <h3>
 
 
 
 
 
+
+
                     Delete post?
+
+
 
 
 
@@ -2452,7 +2740,13 @@ export default function Post({
 
 
 
+
+
+
+
                 <p>
+
+
 
 
 
@@ -2464,7 +2758,15 @@ export default function Post({
 
 
 
+
+
                 </p>
+
+
+
+
+
+
 
 
 
@@ -2482,7 +2784,13 @@ export default function Post({
 
 
 
+
+
+
+
                     <button
+
+
 
 
 
@@ -2494,13 +2802,19 @@ export default function Post({
 
 
 
+
+
                         onClick={()=>{
 
 
 
 
 
+
+
                             setShowDeletePopup(false);
+
+
 
 
 
@@ -2513,7 +2827,11 @@ export default function Post({
 
 
 
+
+
                     >
+
+
 
 
 
@@ -2525,7 +2843,15 @@ export default function Post({
 
 
 
+
+
                     </button>
+
+
+
+
+
+
 
 
 
@@ -2541,7 +2867,11 @@ export default function Post({
 
 
 
+
+
                         className="confirm-delete"
+
+
 
 
 
@@ -2553,7 +2883,11 @@ export default function Post({
 
 
 
+
+
                     >
+
+
 
 
 
@@ -2565,7 +2899,13 @@ export default function Post({
 
 
 
+
+
                     </button>
+
+
+
+
 
 
 
@@ -2581,7 +2921,21 @@ export default function Post({
 
 
 
+
+
+
+
+
+
+
+
             </div>
+
+
+
+
+
+
 
 
 
@@ -2606,7 +2960,12 @@ export default function Post({
 
 
 
+
+
+
+
     </div>
+
 
 
 

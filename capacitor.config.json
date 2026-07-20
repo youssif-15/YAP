@@ -5,5 +5,19 @@
   "server": {
     "url": "https://yap-4lew.vercel.app",
     "cleartext": true
+  },
+  "plugins": {
+    "StatusBar": {
+      "backgroundColor": "#0A84FF",
+      "style": "LIGHT"
+    },
+    "NavigationBar": {
+      "backgroundColor": "#000000"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "showSpinner": false,
+      "backgroundColor": "#0A84FF"
+    }
   }
 }
