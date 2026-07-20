@@ -8,6 +8,8 @@ import {
 
 import Toast from "@/components/Toast/Toast";
 
+import Offline from "@/components/Offline/Offline";
+
 export const metadata = {
 
     title:"YAP",
@@ -31,6 +33,8 @@ export default function RootLayout({children}){
                     <Toast/>
 
                     {children}
+
+                    <Offline/>
 
                 </AuthProvider>
 

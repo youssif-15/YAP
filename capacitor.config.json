@@ -1,0 +1,9 @@
+{
+  "appId": "com.yap.social",
+  "appName": "YAP",
+  "webDir": "public",
+  "server": {
+    "url": "https://yap-4lew.vercel.app",
+    "cleartext": true
+  }
+}

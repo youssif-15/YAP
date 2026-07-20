@@ -9765,3 +9765,55 @@ body{
     animation-play-state:paused;
 
 }
+
+.offline-screen{
+
+    position:fixed;
+    inset:0;
+
+    background:#fff;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:15px;
+
+    z-index:99999;
+
+    text-align:center;
+
+}
+
+
+.offline-screen img{
+
+    border-radius:20px;
+
+}
+
+
+.offline-screen h1{
+
+    font-size:24px;
+
+}
+
+
+.offline-screen button{
+
+    padding:10px 25px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1877f2;
+
+    color:white;
+
+    cursor:pointer;
+
+}
