@@ -1,0 +1,387 @@
+/* =========================
+   USER FLASHBACK PAGE
+========================= */
+
+
+.flashback-user-page{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:20px;
+
+    width:100%;
+
+}
+
+
+
+
+
+/*
+    keep center despite sidebar
+*/
+
+.app-layout .flashback-user-page{
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+    position:relative;
+
+}
+
+
+
+
+
+/* fake right card space */
+
+.fake-user-card{
+
+    width:300px;
+
+    height:500px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+
+.back-button{
+
+    width:fit-content;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    padding:10px 22px;
+
+
+    border:2px dashed #2563eb;
+
+
+    background:white;
+
+
+    color:#2563eb;
+
+
+    border-radius:16px;
+
+
+    font-size:15px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.25s;
+
+
+}
+
+
+
+.back-button span{
+
+    color:inherit;
+
+}
+
+
+
+
+.back-button:hover{
+
+    background:#2563eb;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.back-button:hover span{
+
+    color:white;
+
+}
+
+
+
+.back-button:active{
+
+    transform:scale(.96);
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   FLASHBACK CONTAINER
+========================= */
+
+
+.flashback-user-page .flashback-container{
+
+
+    width:600px;
+
+
+    max-width:100%;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+
+/* =========================
+   REMOVE MAIN FEED CONTROLS
+========================= */
+
+
+.flashback-user-page .create-flashback-button,
+
+.flashback-user-page .flashback-tabs,
+
+.flashback-user-page .flashback-users{
+
+
+    display:none !important;
+
+
+}
+
+
+
+
+
+
+/* =========================
+   POSTS
+========================= */
+
+
+.flashback-user-page .flashback-posts{
+
+
+    width:600px;
+
+
+    max-width:100%;
+
+
+}
+
+
+
+
+
+
+.flashback-user-page .flashback-post{
+
+
+    width:600px;
+
+
+    max-width:100%;
+
+
+    background:white;
+
+
+    border-radius:18px;
+
+
+    overflow:hidden;
+
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+
+}
+
+
+
+
+
+
+/* =========================
+   IMAGE FLEX
+========================= */
+
+
+.flashback-user-page .post-media{
+
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f8fafc;
+
+}
+
+
+
+
+
+.flashback-user-page .post-image{
+
+
+    width:100%;
+
+    height:auto;
+
+    max-height:700px;
+
+    object-fit:contain;
+
+    display:block;
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   VIDEO FLEX
+========================= */
+
+
+.flashback-user-page .post-video-player{
+
+
+    width:100%;
+
+    max-height:700px;
+
+    background:black;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+
+
+.flashback-user-page .post-video-element{
+
+
+    width:100%;
+
+    height:auto;
+
+    max-height:700px;
+
+    object-fit:contain;
+
+}
+
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:700px){
+
+
+    .flashback-user-page{
+
+        width:100%;
+
+    }
+
+
+
+
+
+    .flashback-user-page .flashback-container,
+
+    .flashback-user-page .flashback-posts,
+
+    .flashback-user-page .flashback-post{
+
+
+        width:100%;
+
+        max-width:100%;
+
+
+    }
+
+
+
+
+
+    .back-button{
+
+
+        font-size:14px;
+
+        padding:9px 18px;
+
+
+    }
+
+
+}

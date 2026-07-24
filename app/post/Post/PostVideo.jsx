@@ -30,6 +30,8 @@ import {
 
 
 
+
+
 export default function PostVideo({
 
     video
@@ -54,6 +56,8 @@ export default function PostVideo({
 
 
 
+
+
     const [playing,setPlaying] = useState(false);
 
     const [muted,setMuted] = useState(false);
@@ -69,8 +73,6 @@ export default function PostVideo({
     const [showSettings,setShowSettings] = useState(false);
 
     const [speed,setSpeed] = useState(1);
-
-    const [aspectRatio,setAspectRatio] = useState("16 / 9");
 
     const [showHeart,setShowHeart] = useState(false);
 
@@ -98,6 +100,7 @@ export default function PostVideo({
 
 
         }
+
 
 
 
@@ -139,7 +142,6 @@ export default function PostVideo({
 
 
 
-
     useEffect(()=>{
 
 
@@ -166,6 +168,8 @@ export default function PostVideo({
 
 
 
+
+
         window.addEventListener(
 
             "video-play",
@@ -173,6 +177,7 @@ export default function PostVideo({
             stopOtherVideos
 
         );
+
 
 
 
@@ -193,16 +198,7 @@ export default function PostVideo({
 
 
     },[]);
-
-
-
-
-
-
-
-
-
-    function controls(){
+        function controls(){
 
 
         setShowControls(true);
@@ -240,6 +236,14 @@ export default function PostVideo({
     function togglePlay(){
 
 
+        if(!videoRef.current)
+
+            return;
+
+
+
+
+
         if(videoRef.current.paused){
 
 
@@ -247,6 +251,8 @@ export default function PostVideo({
 
 
             setPlaying(true);
+
+
 
 
 
@@ -282,10 +288,15 @@ export default function PostVideo({
 
 
 
+
+
         controls();
 
 
     }
+
+
+
 
 
 
@@ -298,9 +309,20 @@ export default function PostVideo({
     function toggleMute(){
 
 
+
+        if(!videoRef.current)
+
+            return;
+
+
+
+
+
         videoRef.current.muted =
 
         !videoRef.current.muted;
+
+
 
 
 
@@ -309,6 +331,8 @@ export default function PostVideo({
             videoRef.current.muted
 
         );
+
+
 
 
 
@@ -325,13 +349,28 @@ export default function PostVideo({
 
 
 
+
+
+
+
     function toggleFullscreen(){
+
+
+
+        if(!videoRef.current)
+
+            return;
+
+
+
 
 
         if(!document.fullscreenElement){
 
 
+
             videoRef.current.requestFullscreen();
+
 
 
         }
@@ -342,14 +381,36 @@ export default function PostVideo({
             document.exitFullscreen();
 
 
+
         }
 
 
+
     }
-        function changeSpeed(value){
 
 
-        videoRef.current.playbackRate = value;
+
+
+
+
+
+
+
+
+
+
+    function changeSpeed(value){
+
+
+
+        if(videoRef.current){
+
+
+            videoRef.current.playbackRate = value;
+
+
+        }
+
 
 
         setSpeed(value);
@@ -358,7 +419,12 @@ export default function PostVideo({
         setShowSettings(false);
 
 
+
     }
+
+
+
+
 
 
 
@@ -371,13 +437,17 @@ export default function PostVideo({
     function formatTime(time){
 
 
-        if(!time)
+
+        if(!time || isNaN(time))
 
             return "0:00";
 
 
 
+
+
         const min = Math.floor(time / 60);
+
 
 
         const sec = Math.floor(time % 60)
@@ -388,10 +458,17 @@ export default function PostVideo({
 
 
 
+
+
         return `${min}:${sec}`;
 
 
+
     }
+
+
+
+
 
 
 
@@ -404,7 +481,16 @@ export default function PostVideo({
     function loaded(){
 
 
+
         const el = videoRef.current;
+
+
+
+        if(!el)
+
+            return;
+
+
 
 
 
@@ -416,27 +502,38 @@ export default function PostVideo({
 
 
 
+        // مهم: نخلي الكونتينر ياخد أبعاد الفيديو الحقيقية
 
-        if(
+        const ratio =
 
-            el.videoWidth &&
+        el.videoHeight /
 
-            el.videoHeight
-
-        ){
+        el.videoWidth;
 
 
-            setAspectRatio(
 
-                `${el.videoWidth} / ${el.videoHeight}`
 
-            );
+
+        if(containerRef.current){
+
+
+
+            containerRef.current.style.aspectRatio =
+
+            `${el.videoWidth} / ${el.videoHeight}`;
+
 
 
         }
 
 
+
+
     }
+
+
+
+
 
 
 
@@ -449,20 +546,29 @@ export default function PostVideo({
     function showLikeAnimation(){
 
 
+
         setShowHeart(true);
+
+
 
 
 
         setTimeout(()=>{
 
 
+
             setShowHeart(false);
+
 
 
         },700);
 
 
+
     }
+
+
+
 
 
 
@@ -475,20 +581,29 @@ export default function PostVideo({
     function showPlayPauseAnimation(type){
 
 
+
         setShowPlayAnimation(type);
+
+
 
 
 
         setTimeout(()=>{
 
 
+
             setShowPlayAnimation(null);
+
 
 
         },700);
 
 
+
     }
+
+
+
 
 
 
@@ -502,13 +617,18 @@ export default function PostVideo({
 
 
 
+
+
         if(clickTimer.current){
+
 
 
             clearTimeout(clickTimer.current);
 
 
-            clickTimer.current = null;
+
+            clickTimer.current=null;
+
 
 
 
@@ -519,7 +639,9 @@ export default function PostVideo({
             return;
 
 
+
         }
+
 
 
 
@@ -531,53 +653,25 @@ export default function PostVideo({
 
 
 
-            if(videoRef.current.paused){
-
-
-                videoRef.current.play();
-
-
-                setPlaying(true);
+            togglePlay();
 
 
 
-                window.dispatchEvent(
+            showPlayPauseAnimation(
 
-                    new CustomEvent(
+                videoRef.current.paused
 
-                        "video-play",
+                ?
 
-                        {
+                "pause"
 
-                            detail:videoRef.current
+                :
 
-                        }
+                "play"
 
-                    )
-
-                );
+            );
 
 
-
-                showPlayPauseAnimation("play");
-
-
-            }
-
-            else{
-
-
-                videoRef.current.pause();
-
-
-                setPlaying(false);
-
-
-
-                showPlayPauseAnimation("pause");
-
-
-            }
 
 
 
@@ -590,16 +684,7 @@ export default function PostVideo({
 
 
     }
-
-
-
-
-
-
-
-
-
-    function handleTouch(){
+        function handleTouch(){
 
 
         const now = Date.now();
@@ -621,11 +706,16 @@ export default function PostVideo({
 
 
 
+
         lastTap.current = now;
 
 
 
     }
+
+
+
+
 
 
 
@@ -674,6 +764,9 @@ export default function PostVideo({
 
 
 
+
+
+
             <video
 
 
@@ -713,11 +806,21 @@ export default function PostVideo({
 
 
 
-
             />
+
+
+
+
+
+
+
+
+
             {
 
+
             showHeart &&
+
 
 
             <div className="double-heart">
@@ -746,12 +849,16 @@ export default function PostVideo({
 
 
 
+
             {
+
 
             showPlayAnimation &&
 
 
+
             <div className="video-play-animation">
+
 
 
                 {
@@ -760,6 +867,7 @@ export default function PostVideo({
                 showPlayAnimation === "play"
 
                 ?
+
 
                 <PlayCircle
 
@@ -775,6 +883,7 @@ export default function PostVideo({
                 :
 
 
+
                 <PauseCircle
 
                 size={120}
@@ -786,13 +895,18 @@ export default function PostVideo({
                 />
 
 
+
                 }
+
 
 
             </div>
 
 
             }
+
+
+
 
 
 
@@ -818,19 +932,22 @@ export default function PostVideo({
 
 
 
-
                 <button onClick={togglePlay}>
 
 
                     {
 
+
                     playing
 
                     ?
 
+
                     <Pause size={22}/>
 
+
                     :
+
 
                     <Play size={22}/>
 
@@ -838,7 +955,10 @@ export default function PostVideo({
                     }
 
 
+
                 </button>
+
+
 
 
 
@@ -851,18 +971,23 @@ export default function PostVideo({
 
                     {
 
+
                     muted
 
                     ?
 
+
                     <VolumeX size={22}/>
 
+
                     :
+
 
                     <Volume2 size={22}/>
 
 
                     }
+
 
 
                 </button>
@@ -902,11 +1027,13 @@ export default function PostVideo({
                     Number(e.target.value);
 
 
+
                 }}
 
 
 
                 />
+
 
 
 
@@ -938,6 +1065,7 @@ export default function PostVideo({
                 <div className="video-settings">
 
 
+
                     <button
 
                     onClick={()=>setShowSettings(!showSettings)}
@@ -956,6 +1084,8 @@ export default function PostVideo({
 
 
 
+
+
                     {
 
 
@@ -966,24 +1096,18 @@ export default function PostVideo({
                     <div className="settings-menu">
 
 
-
                         <p>Speed</p>
 
 
 
-                        {[
 
-                            0.5,
 
-                            1,
+                        {
 
-                            1.25,
 
-                            1.5,
+                        [0.5,1,1.25,1.5,2]
 
-                            2
-
-                        ].map(x=>(
+                        .map(x=>(
 
 
 
@@ -995,7 +1119,7 @@ export default function PostVideo({
 
                             className={
 
-                                speed===x
+                                speed === x
 
                                 ?
 
@@ -1018,10 +1142,17 @@ export default function PostVideo({
                                 {x}x
 
 
+
                             </button>
 
 
-                        ))}
+
+                        ))
+
+
+
+                        }
+
 
 
 
@@ -1062,18 +1193,23 @@ export default function PostVideo({
 
                     {
 
+
                     fullscreen
 
                     ?
 
+
                     <Minimize size={22}/>
 
+
                     :
+
 
                     <Maximize size={22}/>
 
 
                     }
+
 
 
                 </button>
@@ -1085,6 +1221,7 @@ export default function PostVideo({
 
 
             </div>
+
 
 
 

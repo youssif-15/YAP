@@ -19,6 +19,7 @@ import {
 
 import FlashbackPost from "./FlashbackPost";
 
+
 import FlashbackModal from "./FlashbackModal";
 
 
@@ -29,7 +30,24 @@ import FlashbackModal from "./FlashbackModal";
 
 
 
-export default function FlashbackFeed(){
+export default function FlashbackFeed({
+
+    username,
+
+    flashbackId,
+
+    mode
+
+}){
+
+
+
+    const isSingleMode = mode === "single";
+
+
+    const isUserMode = mode === "user";
+
+
 
 
 
@@ -64,6 +82,9 @@ export default function FlashbackFeed(){
 
 
 
+
+
+
     function canSeeMemory(
 
         memory,
@@ -89,6 +110,7 @@ export default function FlashbackFeed(){
 
 
 
+
         if(!user){
 
 
@@ -96,6 +118,7 @@ export default function FlashbackFeed(){
 
 
         }
+
 
 
 
@@ -115,6 +138,7 @@ export default function FlashbackFeed(){
 
 
 
+
         if(memory.privacy === "private"){
 
 
@@ -122,6 +146,7 @@ export default function FlashbackFeed(){
 
 
         }
+
 
 
 
@@ -146,11 +171,12 @@ export default function FlashbackFeed(){
 
 
 
+
         return false;
 
 
-
     }
+
 
 
 
@@ -184,6 +210,7 @@ export default function FlashbackFeed(){
 
 
 
+
         const {
 
             data,
@@ -196,11 +223,13 @@ export default function FlashbackFeed(){
 
         .from("followers")
 
+
         .select(
 
             "following_id"
 
         )
+
 
         .eq(
 
@@ -209,6 +238,7 @@ export default function FlashbackFeed(){
             user.id
 
         );
+
 
 
 
@@ -243,11 +273,10 @@ export default function FlashbackFeed(){
 
         const ids = data?.map(
 
-            item =>
-
-            item.following_id
+            item => item.following_id
 
         ) || [];
+
 
 
 
@@ -260,7 +289,6 @@ export default function FlashbackFeed(){
 
 
         return ids;
-
 
 
     }
@@ -277,12 +305,211 @@ export default function FlashbackFeed(){
 
 
 
+    async function getUserIdByUsername(){
 
+
+
+        if(!username){
+
+
+            return null;
+
+
+        }
+
+
+
+
+
+
+
+
+        const {
+
+            data,
+
+            error
+
+        } = await supabase
+
+
+
+        .from("profiles")
+
+
+        .select(
+
+            "id"
+
+        )
+
+
+        .eq(
+
+            "username",
+
+            username
+
+        )
+
+
+        .single();
+
+
+
+
+
+
+
+
+        if(error){
+
+
+
+            console.log(
+
+                "PROFILE USER ERROR:",
+
+                error
+
+            );
+
+
+            return null;
+
+
+        }
+
+
+
+
+
+
+
+
+        return data.id;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    async function getSingleMemory(){
+
+
+
+        if(!flashbackId){
+
+
+            setMemories([]);
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        const {
+
+            data,
+
+            error
+
+        } = await supabase
+
+
+
+        .from("flashbacks")
+
+
+        .select(`
+
+            *,
+
+            profile:profiles(
+
+                username,
+
+                avatar_url,
+
+                is_owner
+
+            )
+
+        `)
+
+
+        .eq(
+
+            "id",
+
+            flashbackId
+
+        )
+
+
+        .single();
+
+
+
+
+
+
+
+
+        if(error){
+
+
+
+            console.log(
+
+                "SINGLE FLASHBACK ERROR:",
+
+                error
+
+            );
+
+
+            setMemories([]);
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        setMemories([data]);
+
+
+    }
     async function getFlashbackUsers(
 
-        user=currentUser,
+        user = currentUser,
 
-        following=followingIds
+        following = followingIds
 
     ){
 
@@ -300,6 +527,7 @@ export default function FlashbackFeed(){
 
         .from("flashbacks")
 
+
         .select(`
 
             *,
@@ -315,6 +543,7 @@ export default function FlashbackFeed(){
             )
 
         `)
+
 
         .order(
 
@@ -360,7 +589,8 @@ export default function FlashbackFeed(){
 
 
 
-        const visible = data.filter(memory=>
+        const visible = data.filter(memory =>
+
 
 
             canSeeMemory(
@@ -373,7 +603,10 @@ export default function FlashbackFeed(){
 
             )
 
+
+
         );
+
 
 
 
@@ -399,17 +632,17 @@ export default function FlashbackFeed(){
 
 
 
-                grouped[memory.user_id]={
+                grouped[memory.user_id] = {
 
 
 
-                    user_id:memory.user_id,
+                    user_id: memory.user_id,
 
 
-                    profile:memory.profile,
+                    profile: memory.profile,
 
 
-                    count:1
+                    count: 1
 
 
 
@@ -440,6 +673,7 @@ export default function FlashbackFeed(){
 
 
 
+
         setUsers(
 
             Object.values(grouped)
@@ -449,13 +683,27 @@ export default function FlashbackFeed(){
 
 
     }
-        async function getMemories(
 
-        userId=null,
 
-        user=currentUser,
 
-        following=followingIds
+
+
+
+
+
+
+
+
+
+
+
+    async function getMemories(
+
+        userId = null,
+
+        user = currentUser,
+
+        following = followingIds
 
     ){
 
@@ -473,6 +721,7 @@ export default function FlashbackFeed(){
 
         .from("flashbacks")
 
+
         .select(`
 
             *,
@@ -489,6 +738,7 @@ export default function FlashbackFeed(){
 
         `)
 
+
         .order(
 
             "created_at",
@@ -500,6 +750,8 @@ export default function FlashbackFeed(){
             }
 
         );
+
+
 
 
 
@@ -520,6 +772,9 @@ export default function FlashbackFeed(){
             );
 
 
+            setMemories([]);
+
+
             return;
 
 
@@ -532,9 +787,8 @@ export default function FlashbackFeed(){
 
 
 
+
         const visible = data.filter(memory=>{
-
-
 
 
 
@@ -602,58 +856,33 @@ export default function FlashbackFeed(){
 
 
 
-    function selectUser(id){
-
-
+    async function selectUser(id){
 
         if(selectedUser === id){
 
-
-
             setSelectedUser(null);
-
-
-            setMemories([]);
-
 
             setActiveTab("all");
 
+            await getMemories(
+                null,
+                currentUser,
+                followingIds
+            );
 
             return;
 
-
         }
-
-
-
-
-
-
-
 
         setSelectedUser(id);
 
-
         setActiveTab(null);
 
-
-
-
-
-
-
-
-        getMemories(
-
+        await getMemories(
             id,
-
             currentUser,
-
             followingIds
-
         );
-
-
 
     }
 
@@ -700,7 +929,6 @@ export default function FlashbackFeed(){
             );
 
 
-
         }
 
 
@@ -710,28 +938,19 @@ export default function FlashbackFeed(){
 
 
 
-        if(tab === "mine"){
+        if(tab === "mine" && currentUser){
 
 
 
-            if(currentUser){
+            getMemories(
 
+                currentUser.id,
 
+                currentUser,
 
-                getMemories(
+                followingIds
 
-                    currentUser.id,
-
-                    currentUser,
-
-                    followingIds
-
-                );
-
-
-
-            }
-
+            );
 
 
         }
@@ -739,20 +958,11 @@ export default function FlashbackFeed(){
 
 
     }
+        useEffect(()=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-    useEffect(()=>{
+        let mounted = true;
 
 
 
@@ -760,15 +970,50 @@ export default function FlashbackFeed(){
 
 
 
-            const {
+            try{
 
-                data:{
 
-                    session
+
+                const {
+
+                    data:{
+
+                        session
+
+                    }
+
+                } = await supabase.auth.getSession();
+
+
+
+
+
+
+
+
+                const user = session?.user || null;
+
+
+
+
+
+
+
+
+                if(!mounted){
+
+                    return;
 
                 }
 
-            } = await supabase.auth.getSession();
+
+
+
+
+
+
+
+                setCurrentUser(user);
 
 
 
@@ -777,7 +1022,7 @@ export default function FlashbackFeed(){
 
 
 
-            const user = session?.user;
+                let following = [];
 
 
 
@@ -786,7 +1031,19 @@ export default function FlashbackFeed(){
 
 
 
-            setCurrentUser(user);
+                if(!isSingleMode){
+
+
+
+                    following = await getFollowing(
+
+                        user
+
+                    );
+
+
+
+                }
 
 
 
@@ -795,26 +1052,23 @@ export default function FlashbackFeed(){
 
 
 
-            const following = await getFollowing(
-
-                user
-
-            );
+                if(isSingleMode){
 
 
 
+                    await getSingleMemory();
 
 
 
+                }
 
 
-            await getFlashbackUsers(
 
-                user,
+                else if(isUserMode){
 
-                following
 
-            );
+
+                    const userId = await getUserIdByUsername();
 
 
 
@@ -822,25 +1076,112 @@ export default function FlashbackFeed(){
 
 
 
-
-            await getMemories(
-
-                null,
-
-                user,
-
-                following
-
-            );
+                    if(userId){
 
 
 
+                        await getMemories(
+
+                            userId,
+
+                            user,
+
+                            following
+
+                        );
+
+
+
+                    }
+
+                    else{
+
+
+
+                        setMemories([]);
+
+
+
+                    }
+
+
+
+                }
+
+
+
+                else{
+
+
+
+                    await getFlashbackUsers(
+
+                        user,
+
+                        following
+
+                    );
 
 
 
 
 
-            setLoading(false);
+
+
+                    await getMemories(
+
+                        null,
+
+                        user,
+
+                        following
+
+                    );
+
+
+
+                }
+
+
+
+
+
+
+            }
+
+            catch(error){
+
+
+
+                console.log(
+
+                    "FLASHBACK START ERROR:",
+
+                    error
+
+                );
+
+
+
+            }
+
+            finally{
+
+
+
+                if(mounted){
+
+
+
+                    setLoading(false);
+
+
+
+                }
+
+
+
+            }
 
 
 
@@ -856,7 +1197,27 @@ export default function FlashbackFeed(){
 
 
 
-    },[]);
+
+
+
+
+        return ()=>{
+
+
+
+            mounted = false;
+
+
+
+        };
+
+
+
+
+
+
+
+    },[flashbackId,username,mode]);
 
 
 
@@ -889,10 +1250,38 @@ export default function FlashbackFeed(){
         );
 
 
+
     }
 
 
 
+
+
+
+
+
+
+    if(memories.length === 0){
+
+
+
+        return(
+
+
+
+            <p>
+
+                No memories found.
+
+            </p>
+
+
+
+        );
+
+
+
+    }
 
 
 
@@ -914,6 +1303,12 @@ export default function FlashbackFeed(){
 
 
 
+            {
+
+            !isSingleMode && !isUserMode &&
+
+
+
             <button
 
                 className="create-flashback-button"
@@ -930,9 +1325,23 @@ export default function FlashbackFeed(){
 
 
 
+            }
 
 
 
+
+
+
+
+
+
+
+
+
+
+            {
+
+            !isSingleMode && !isUserMode &&
 
 
 
@@ -940,9 +1349,8 @@ export default function FlashbackFeed(){
 
 
 
-
-
                 <button
+
 
 
                     className={
@@ -958,6 +1366,7 @@ export default function FlashbackFeed(){
                         ""
 
                     }
+
 
 
                     onClick={()=>changeTab("all")}
@@ -976,8 +1385,8 @@ export default function FlashbackFeed(){
 
 
 
-
                 <button
+
 
 
                     className={
@@ -995,6 +1404,7 @@ export default function FlashbackFeed(){
                     }
 
 
+
                     onClick={()=>changeTab("mine")}
 
                 >
@@ -1007,12 +1417,27 @@ export default function FlashbackFeed(){
 
 
 
-
-
             </div>
-                        <div className="flashback-users">
 
 
+
+            }
+
+
+
+
+
+
+
+
+
+            {
+
+            !isSingleMode && !isUserMode &&
+
+
+
+            <div className="flashback-users">
 
 
 
@@ -1046,13 +1471,7 @@ export default function FlashbackFeed(){
 
 
 
-                        onClick={()=>selectUser(
-
-                            user.user_id
-
-                        )}
-
-
+                        onClick={()=>selectUser(user.user_id)}
 
                     >
 
@@ -1102,16 +1521,13 @@ export default function FlashbackFeed(){
 
 
 
-
-
                             <span>
+
 
 
                                 {
 
-                                user.profile?.username
-
-                                ||
+                                user.profile?.username ||
 
                                 "User"
 
@@ -1127,23 +1543,19 @@ export default function FlashbackFeed(){
 
 
 
-
                             <small>
 
 
+
                                 {user.count} Memories
+
 
 
                             </small>
 
 
 
-
-
-
                         </div>
-
-
 
 
 
@@ -1161,11 +1573,11 @@ export default function FlashbackFeed(){
 
 
 
-
-
-
-
             </div>
+
+
+
+            }
 
 
 
@@ -1180,8 +1592,6 @@ export default function FlashbackFeed(){
 
 
             <div className="flashback-posts">
-
-
 
 
 
@@ -1207,31 +1617,19 @@ export default function FlashbackFeed(){
 
 
 
-
-
                             setMemories(prev=>
+
+
 
                                 prev.filter(
 
-                                    item=>
+                                    item =>
 
                                     item.id !== id
 
                                 )
 
-                            );
 
-
-
-
-
-
-
-                            getFlashbackUsers(
-
-                                currentUser,
-
-                                followingIds
 
                             );
 
@@ -1253,11 +1651,8 @@ export default function FlashbackFeed(){
 
 
 
-
-
-
-
             </div>
+
 
 
 
@@ -1272,9 +1667,11 @@ export default function FlashbackFeed(){
 
             {
 
+            !isSingleMode &&
+
+            !isUserMode &&
+
             showCreate &&
-
-
 
 
 
@@ -1290,8 +1687,6 @@ export default function FlashbackFeed(){
 
 
 
-
-
                     getFlashbackUsers(
 
                         currentUser,
@@ -1299,7 +1694,6 @@ export default function FlashbackFeed(){
                         followingIds
 
                     );
-
 
 
 
@@ -1317,8 +1711,6 @@ export default function FlashbackFeed(){
 
 
 
-
-
                 }}
 
 
@@ -1327,9 +1719,8 @@ export default function FlashbackFeed(){
 
 
 
-
-
             }
+
 
 
 

@@ -7,6 +7,8 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 
 import FlashbackFeed from "@/components/Flashback/FlashbackFeed";
 
+import "./Page.css";
+
 
 
 
@@ -23,7 +25,9 @@ export default function Flashbacks(){
 
 
 
-            <div className="app-layout">
+            <div className="app-layout flashbacks-page-layout">
+
+
 
 
 
@@ -33,16 +37,25 @@ export default function Flashbacks(){
 
 
 
-                <main className="content">
+
+
+                <main className="content flashbacks-main">
 
 
 
-                    <FlashbackFeed/>
+
+
+                    <FlashbackFeed />
+
+
+
 
 
 
 
                 </main>
+
+
 
 
 

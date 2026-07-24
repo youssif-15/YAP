@@ -8,7 +8,20 @@ import {
 } from "react";
 
 
+import {
+
+    useRouter
+
+} from "next/navigation";
+
+
 import FlashbackFeed from "@/components/Flashback/FlashbackFeed";
+
+
+import Sidebar from "@/components/Sidebar/Sidebar";
+
+
+import "./Page.css";
 
 
 
@@ -24,6 +37,11 @@ export default function UserFlashbacksPage({
 }){
 
 
+    const router = useRouter();
+
+
+
+
     const {
 
         username
@@ -35,24 +53,78 @@ export default function UserFlashbacksPage({
 
 
 
-
     return(
 
 
-
-        <div className="flashbacks-page">
-
+        <div className="app-layout">
 
 
 
 
-            <FlashbackFeed
 
-                username={username}
 
-                mode="user"
+            <Sidebar/>
 
-            />
+
+
+
+
+
+
+            <main className="content flashback-user-page">
+
+
+
+
+
+                <button
+
+                    className="back-button"
+
+                    onClick={()=>router.back()}
+
+                >
+
+
+                    ← Back
+
+
+                </button>
+
+
+
+
+
+
+
+
+
+                <FlashbackFeed
+
+
+                    flashbackId={username}
+
+
+                    mode="single"
+
+
+                />
+
+
+
+
+
+
+            </main>
+
+
+
+
+
+
+
+
+            <div className="fake-user-card"/>
 
 
 
@@ -62,9 +134,7 @@ export default function UserFlashbacksPage({
         </div>
 
 
-
     );
-
 
 
 }

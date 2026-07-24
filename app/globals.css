@@ -10149,7 +10149,7 @@ body{
 
     width:100%;
 
-    max-height:600px;
+    max-height:100%;
 
     object-fit:cover;
 
@@ -10302,15 +10302,81 @@ body{
 
 
 
+.flashback-media-wrapper{
+
+    width:600px;
+    max-width:100%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    background:#f8fafc;
+
+    overflow:hidden;
+
+}
+
+
+.flashback-media-wrapper .post-image{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
+
+}
+
+
+
+.flashback-media-wrapper .post-video-player{
+
+    width:100%;
+
+    height:auto;
+
+    max-height:700px;
+
+}
+
+
+
+.flashback-media-wrapper .post-video-element{
+
+    width:100%;
+
+    height:auto;
+
+    max-height:700px;
+
+    object-fit:contain;
+
+}
+
+
+
+/* Mobile */
+
 @media(max-width:700px){
 
+    .flashback-media-wrapper{
 
-    .flashback-users{
-
-        grid-template-columns:1fr;
+        width:100%;
 
     }
 
 
-}
+    .flashback-media-wrapper .post-image,
+    .flashback-media-wrapper .post-video-element{
 
+        width:100%;
+
+        height:auto;
+
+    }
+
+}

@@ -1,0 +1,491 @@
+/* =========================
+   POST
+========================= */
+
+.post{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    margin-bottom:25px;
+
+    box-shadow:var(--shadow-small);
+
+    width:fit-content;
+
+    max-width:600px;
+
+}
+
+
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+.post-header{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px;
+
+}
+
+
+
+
+
+.post-user{
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
+
+    min-width:0;
+
+}
+
+
+
+
+
+/* =========================
+   CAPTION
+========================= */
+
+
+.post-caption{
+
+    width:100%;
+
+    padding:10px 15px;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+}
+
+
+
+
+
+/* =========================
+   MEDIA WRAPPER
+========================= */
+
+
+.post-media{
+
+    width:fit-content;
+
+    max-width:600px;
+
+    max-height:700px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#000;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+/* =========================
+   IMAGE
+========================= */
+
+
+.post-image{
+
+    display:block;
+
+    width:auto;
+
+    height:auto;
+
+    max-width:600px;
+
+    max-height:700px;
+
+    object-fit:contain;
+
+}
+
+
+
+
+
+/* =========================
+   VIDEO PLAYER
+========================= */
+
+
+.post-video-player{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#000;
+
+    width:fit-content;
+
+    max-width:600px;
+
+    max-height:700px;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+.post-video-element{
+
+    display:block;
+
+    width:auto;
+
+    height:auto;
+
+    max-width:600px;
+
+    max-height:700px;
+
+    object-fit:contain;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* =========================
+ CONTROLS
+========================= */
+
+
+.post-video-controls{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    right:0;
+
+    z-index:10;
+
+    padding:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.8)
+    );
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+
+
+.post-video-controls.hide{
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+
+.post-video-controls.show{
+
+    opacity:1;
+
+}
+
+
+
+.post-video-controls button{
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+.time-bar{
+
+    flex:1;
+
+}
+
+
+
+
+
+/* =========================
+ ANIMATIONS
+========================= */
+
+
+.video-play-animation{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:5;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    pointer-events:none;
+
+    animation:video-pop .7s ease;
+
+}
+
+
+
+.double-heart{
+
+    position:absolute;
+
+    z-index:6;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    pointer-events:none;
+
+}
+
+
+
+
+
+@keyframes video-pop{
+
+
+    0%{
+
+        opacity:0;
+
+        transform:scale(.5);
+
+    }
+
+
+    40%{
+
+        opacity:1;
+
+        transform:scale(1.1);
+
+    }
+
+
+    100%{
+
+        opacity:0;
+
+        transform:scale(1);
+
+    }
+
+
+}
+
+
+
+
+
+/* =========================
+   FLASHBACK
+========================= */
+
+
+.flashback-post{
+
+    width:fit-content;
+
+    max-width:600px;
+
+}
+
+
+
+
+
+.flashback-post .post-media,
+
+.flashback-post .post-video-player{
+
+    width:fit-content;
+
+    max-width:100%;
+
+}
+
+
+
+
+
+.flashback-post .post-image,
+
+.flashback-post .post-video-element{
+
+    width:auto;
+
+    height:auto;
+
+    max-width:600px;
+
+    max-height:700px;
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:700px){
+
+
+
+    .post{
+
+        width:100%;
+
+        max-width:100%;
+
+        border-radius:14px;
+
+    }
+
+
+
+
+
+    .post-header{
+
+        padding:12px;
+
+    }
+
+
+
+
+
+    .post-caption{
+
+        padding:10px 12px;
+
+    }
+
+
+
+
+
+    .post-media,
+
+    .post-video-player{
+
+        width:100%;
+
+        max-width:100%;
+
+        max-height:none;
+
+    }
+
+
+
+
+
+    .post-image,
+
+    .post-video-element{
+
+        width:auto;
+
+        height:auto;
+
+        max-width:100%;
+
+        max-height:none;
+
+    }
+
+
+
+}

@@ -3,7 +3,8 @@
 
 import {
 
-    useState
+    useState,
+    useRef
 
 } from "react";
 
@@ -43,7 +44,11 @@ import {
 import OwnerBadge from "@/components/OwnerBadge/OwnerBadge";
 
 
+import PostVideo from "@/app/post/Post/PostVideo";
 
+
+
+import "./anyways.css";
 
 
 
@@ -65,9 +70,11 @@ export default function FlashbackPost({
     const {user} = useAuth();
 
 
+    const mediaRef = useRef(null);
+
+
 
     const [showMenu,setShowMenu] = useState(false);
-
 
 
     const [shared,setShared] = useState(false);
@@ -78,12 +85,12 @@ export default function FlashbackPost({
 
 
 
+
+
     function openProfile(){
 
 
-
         if(flashback.profile?.username){
-
 
 
             router.push(
@@ -132,7 +139,6 @@ export default function FlashbackPost({
 
 
 
-
         if(error){
 
 
@@ -161,8 +167,8 @@ export default function FlashbackPost({
 
 
 
-        if(onDelete){
 
+        if(onDelete){
 
 
             onDelete(
@@ -175,10 +181,7 @@ export default function FlashbackPost({
         }
 
 
-
     }
-
-
 
 
 
@@ -195,7 +198,6 @@ export default function FlashbackPost({
         const url =
 
         `${window.location.origin}/flashbacks/${flashback.id}`;
-
 
 
 
@@ -233,6 +235,7 @@ export default function FlashbackPost({
 
 
 
+
                 setTimeout(()=>{
 
 
@@ -267,7 +270,6 @@ export default function FlashbackPost({
 
 
     }
-
 
 
 
@@ -324,16 +326,7 @@ export default function FlashbackPost({
 
 
         <div className="post flashback-post">
-
-
-
-
-
-
-
-
-
-            <div className="post-header">
+                        <div className="post-header">
 
 
 
@@ -353,7 +346,9 @@ export default function FlashbackPost({
 
                     {
 
+
                     flashback.profile?.avatar_url
+
 
                     ?
 
@@ -380,10 +375,6 @@ export default function FlashbackPost({
 
 
 
-
-
-
-
                     <div>
 
 
@@ -391,9 +382,7 @@ export default function FlashbackPost({
                         <h4>
 
 
-
                             <span>
-
 
 
                                 {
@@ -409,22 +398,25 @@ export default function FlashbackPost({
 
 
 
+
                                 {
+
 
                                 flashback.profile?.is_owner &&
 
+
                                 <OwnerBadge/>
 
-                                }
 
+                                }
 
 
 
                             </span>
 
 
-
                         </h4>
+
 
 
 
@@ -438,7 +430,6 @@ export default function FlashbackPost({
 
 
                     </div>
-
 
 
 
@@ -464,7 +455,9 @@ export default function FlashbackPost({
 
                     >
 
+
                         <MoreHorizontal size={20}/>
+
 
 
                     </button>
@@ -475,7 +468,10 @@ export default function FlashbackPost({
 
 
 
+
+
                     {
+
 
                     showMenu && isOwner &&
 
@@ -491,9 +487,13 @@ export default function FlashbackPost({
 
                         >
 
+
+
                             <Trash2 size={15}/>
 
+
                             Delete memory
+
 
 
                         </button>
@@ -513,9 +513,6 @@ export default function FlashbackPost({
 
 
 
-
-
-
             </div>
 
 
@@ -529,7 +526,9 @@ export default function FlashbackPost({
 
 
 
+
             {
+
 
             flashback.caption &&
 
@@ -549,7 +548,6 @@ export default function FlashbackPost({
             </p>
 
 
-
             }
 
 
@@ -560,59 +558,140 @@ export default function FlashbackPost({
 
 
 
-            {
-
-            flashback.media_type === "video"
-
-            ?
-
-
-
-            <video
-
-                src={flashback.media_url}
-
-                className="post-media"
-
-                autoPlay
-
-                muted
-
-                loop
-
-                playsInline
-
-            />
-
-
-
-            :
-
-
-
-            <img
-
-                src={flashback.media_url}
-
-                className="post-media"
-
-                alt="memory"
-
-            />
-
-
-
-            }
 
 
 
 
 
+            <div className="flashback-media-wrapper">
 
 
 
 
-            <div className="post-actions">
+
+                {
+
+
+                flashback.media_type === "video"
+
+
+                ?
+
+
+
+                <PostVideo
+
+
+                    video={flashback.media_url}
+
+
+                />
+
+
+
+                :
+
+
+
+                <img
+
+
+
+                    ref={mediaRef}
+
+
+
+                    src={flashback.media_url}
+
+
+
+                    className="flashback-image"
+
+
+
+                    alt="memory"
+
+
+
+
+                    onLoad={(e)=>{
+
+
+
+                        const img = e.target;
+
+
+
+                        const wrapper =
+
+                        img.parentElement;
+
+
+
+
+
+
+                        wrapper.style.width =
+
+
+                        img.naturalWidth > 600
+
+
+                        ?
+
+
+                        "600px"
+
+
+                        :
+
+
+                        img.naturalWidth + "px";
+
+
+
+
+
+
+
+                        wrapper.style.height =
+
+
+
+                        img.naturalHeight > 700
+
+
+                        ?
+
+
+                        "700px"
+
+
+                        :
+
+
+                        img.naturalHeight + "px";
+
+
+
+
+
+                    }}
+
+
+
+                />
+
+
+
+                }
+
+
+
+
+
+            </div>
+                        <div className="post-actions">
 
 
 
@@ -640,7 +719,10 @@ export default function FlashbackPost({
 
 
 
+
+
                 {
+
 
                 shared &&
 
@@ -648,12 +730,15 @@ export default function FlashbackPost({
 
                 <span className="share-message">
 
+
                     Link copied
+
 
                 </span>
 
 
                 }
+
 
 
 
