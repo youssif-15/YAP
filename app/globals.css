@@ -10380,3 +10380,31 @@ body{
     }
 
 }
+
+.flashback-empty{
+
+    width:100%;
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:#8b8b8b;
+
+}
+
+.flashback-empty h3{
+
+    font-size:22px;
+
+    margin-bottom:10px;
+
+}
+
+.flashback-empty p{
+
+    font-size:15px;
+
+    opacity:.8;
+
+}

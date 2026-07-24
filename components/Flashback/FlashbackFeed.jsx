@@ -1257,40 +1257,6 @@ export default function FlashbackFeed({
 
 
 
-
-
-
-
-    if(memories.length === 0){
-
-
-
-        return(
-
-
-
-            <p>
-
-                No memories found.
-
-            </p>
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
     return(
 
 
@@ -1596,57 +1562,41 @@ export default function FlashbackFeed({
 
 
                 {
+                    memories.length === 0 ? (
 
-                memories.map(memory=>(
+                        <div className="flashback-empty">
 
+                            <h3>No memories yet</h3>
 
+                            <p>
+                                Create your first memory to get started.
+                            </p>
 
-                    <FlashbackPost
+                        </div>
 
+                    ) : (
 
+                        memories.map(memory => (
 
-                        key={memory.id}
+                            <FlashbackPost
+                                key={memory.id}
+                                flashback={memory}
+                                onDelete={(id)=>{
 
+                                    setMemories(prev=>
 
+                                        prev.filter(
+                                            item=>item.id!==id
+                                        )
 
-                        flashback={memory}
+                                    );
 
+                                }}
+                            />
 
+                        ))
 
-                        onDelete={(id)=>{
-
-
-
-                            setMemories(prev=>
-
-
-
-                                prev.filter(
-
-                                    item =>
-
-                                    item.id !== id
-
-                                )
-
-
-
-                            );
-
-
-
-                        }}
-
-
-
-                    />
-
-
-
-                ))
-
-
-
+                    )
                 }
 
 
