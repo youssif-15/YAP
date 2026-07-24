@@ -604,8 +604,9 @@
 
     gap:20px;
 
-}
+    padding-top:30px;
 
+}
 
 
 
@@ -977,6 +978,421 @@
 
 
     }
+
+
+}
+
+/* =========================
+   RESPONSIVE FLASHBACKS
+========================= */
+
+
+
+@media(max-width:700px){
+
+
+
+    .flashback-container{
+
+        gap:15px;
+
+        padding:0 10px;
+
+    }
+
+
+
+
+
+
+
+    /* CREATE BUTTON */
+
+    .create-flashback-button{
+
+
+        width:100%;
+
+
+        justify-content:center;
+
+
+        text-align:center;
+
+
+        padding:14px;
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+
+
+
+
+
+    /* TABS */
+
+
+    .flashback-tabs{
+
+
+        width:100%;
+
+
+        display:flex;
+
+
+    }
+
+
+
+
+    .flashback-tabs button{
+
+
+        flex:1;
+
+
+        padding:11px 10px;
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    /* USERS */
+
+
+    .flashback-users{
+
+
+        grid-template-columns:1fr;
+
+
+        gap:12px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-user-card{
+
+
+        padding:12px;
+
+
+        border-radius:18px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-user-card img,
+    .flashback-user-card .avatar-empty{
+
+
+        width:52px;
+
+
+        height:52px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-user-text span{
+
+
+        font-size:15px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-user-text small{
+
+
+        font-size:12px;
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* POSTS */
+
+
+    .flashback-post{
+
+
+        border-radius:18px;
+
+
+    }
+
+
+
+
+
+
+
+    /* MODAL */
+
+
+    .flashback-modal-overlay{
+
+
+        padding:15px;
+
+
+        align-items:flex-end;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-create-modal{
+
+
+        width:100%;
+
+
+        max-width:none;
+
+
+        border-radius:25px 25px 0 0;
+
+
+        padding:18px;
+
+
+        max-height:90vh;
+
+
+        overflow-y:auto;
+
+
+    }
+
+
+
+
+
+
+
+
+    .flashback-modal-header h2{
+
+
+        font-size:18px;
+
+
+    }
+
+
+
+
+
+
+
+
+    .memory-file-box{
+
+
+        height:120px;
+
+
+        border-radius:18px;
+
+
+    }
+
+
+
+
+
+
+
+    .memory-file-box span{
+
+
+        font-size:14px;
+
+
+        padding:15px;
+
+
+    }
+
+
+
+
+
+
+
+
+    .flashback-uploader textarea{
+
+
+        min-height:100px;
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+
+
+
+
+
+    .memory-create-button{
+
+
+        padding:14px;
+
+
+        font-size:15px;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@media(max-width:400px){
+
+
+
+    .flashback-container{
+
+
+        padding:0 5px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-user-card{
+
+
+        gap:10px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-user-card img,
+    .flashback-user-card .avatar-empty{
+
+
+        width:48px;
+
+
+        height:48px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-tabs button{
+
+
+        font-size:13px;
+
+
+        padding:10px 5px;
+
+
+    }
+
+
+
+
+
+
+
+    .flashback-create-modal{
+
+
+        padding:15px;
+
+
+    }
+
 
 
 }

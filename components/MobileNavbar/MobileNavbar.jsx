@@ -2,29 +2,38 @@
 
 
 import {
+
     useState
+
 } from "react";
 
 
 import {
+
     MoreVertical,
     Home,
     Search,
+    History,
     Film,
     User,
     Settings,
     LogOut
+
 } from "lucide-react";
 
 
 import {
+
     useRouter,
     usePathname
+
 } from "next/navigation";
 
 
 import {
+
     supabase
+
 } from "@/lib/supabase";
 
 
@@ -35,10 +44,14 @@ import NotificationBell from "@/components/Notifications/NotificationBell";
 
 
 
+
+
 export default function MobileNavbar(){
 
 
+
     const router = useRouter();
+
 
     const pathname = usePathname();
 
@@ -51,13 +64,19 @@ export default function MobileNavbar(){
 
 
 
+
+
+
     async function logout(){
+
 
 
         await supabase.auth.signOut();
 
 
+
         router.push("/login");
+
 
 
     }
@@ -67,7 +86,11 @@ export default function MobileNavbar(){
 
 
 
+
+
+
     async function openProfile(){
+
 
 
         const {
@@ -83,7 +106,15 @@ export default function MobileNavbar(){
 
 
 
+
+
+
         if(!user) return;
+
+
+
+
+
 
 
 
@@ -93,24 +124,49 @@ export default function MobileNavbar(){
 
         } = await supabase
 
+
+
         .from("profiles")
+
+
 
         .select("username")
 
-        .eq("id",user.id)
+
+
+        .eq(
+
+            "id",
+
+            user.id
+
+        )
+
+
 
         .single();
 
 
 
 
+
+
+
+
         if(profile?.username){
 
+
+
             router.push(
+
                 `/profile/${profile.username}`
+
             );
 
+
+
         }
+
 
 
     }
@@ -121,149 +177,351 @@ export default function MobileNavbar(){
 
 
 
+
+
+
+
+
+
+
     return(
+
+
 
         <>
 
 
-        <nav className="mobile-top-navbar">
 
-
-
-            <img
-
-                src="/icon.png"
-
-                className="mobile-logo"
-
-                onClick={()=>router.push("/home")}
-
-            />
+            <nav className="mobile-top-navbar">
 
 
 
 
 
-            <div className="mobile-top-actions">
+
+                <img
 
 
-                <NotificationBell />
+
+                    src="/icon.png"
+
+
+
+                    className="mobile-logo"
+
+
+
+                    onClick={()=>router.push("/home")}
+
+
+
+                />
+
+
+
+
+
+
+
+
+
+
+                <div className="mobile-top-actions">
+
+
+
+
+
+
+                    <NotificationBell />
+
+
+
+
+
+
+
+
+                    <button
+
+
+
+                        onClick={()=>setOpen(!open)}
+
+
+
+                        className="mobile-menu-button"
+
+
+
+                    >
+
+
+
+                        <MoreVertical size={26}/>
+
+
+
+                    </button>
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {
+
+
+            open &&
+
+
+
+
+
+
+            <div className="mobile-side-menu">
+
+
+
+
+
 
 
 
                 <button
 
-                    onClick={()=>setOpen(!open)}
-
-                    className="mobile-menu-button"
+                    onClick={()=>router.push("/home")}
 
                 >
 
-                    <MoreVertical size={26}/>
+
+
+                    <Home size={22}/>
+
+
+
+                    Home
+
+
 
                 </button>
+
+
+
+
+
+
+
+
+
+                <button
+
+                    onClick={()=>router.push("/search")}
+
+                >
+
+
+
+                    <Search size={22}/>
+
+
+
+                    Search
+
+
+
+                </button>
+
+
+
+
+
+
+
+
+
+                <button
+
+                    onClick={()=>router.push("/flashbacks")}
+
+                >
+
+
+
+                    <History size={22}/>
+
+
+
+                    Flashbacks
+
+
+
+                </button>
+
+
+
+
+
+
+
+
+
+                <button
+
+                    onClick={()=>router.push("/reels")}
+
+                >
+
+
+
+                    <Film size={22}/>
+
+
+
+                    Reels
+
+
+
+                </button>
+
+
+
+
+
+
+
+
+
+                <button
+
+                    onClick={openProfile}
+
+                >
+
+
+
+                    <User size={22}/>
+
+
+
+                    Profile
+
+
+
+                </button>
+
+
+
+
+
+
+
+
+
+                <button
+
+                    onClick={()=>router.push("/settings")}
+
+                >
+
+
+
+                    <Settings size={22}/>
+
+
+
+                    Settings
+
+
+
+                </button>
+
+
+
+
+
+
+
+
+
+                <button
+
+
+
+                    onClick={logout}
+
+
+
+                    className="logout-mobile"
+
+
+
+                >
+
+
+
+                    <LogOut size={22}/>
+
+
+
+                    Logout
+
+
+
+                </button>
+
+
+
+
+
+
 
 
             </div>
 
 
 
-        </nav>
+
+
+
+            }
 
 
 
 
 
-
-
-        {
-        open &&
-
-
-        <div className="mobile-side-menu">
-
-
-            <button onClick={()=>router.push("/home")}>
-
-                <Home size={22}/>
-
-                Home
-
-            </button>
-
-
-
-            <button onClick={()=>router.push("/search")}>
-
-                <Search size={22}/>
-
-                Search
-
-            </button>
-
-
-
-
-            <button onClick={()=>router.push("/reels")}>
-
-                <Film size={22}/>
-
-                Reels
-
-            </button>
-
-
-
-
-            <button onClick={openProfile}>
-
-                <User size={22}/>
-
-                Profile
-
-            </button>
-
-
-
-
-
-            <button onClick={()=>router.push("/settings")}>
-
-                <Settings size={22}/>
-
-                Settings
-
-            </button>
-
-
-
-
-
-            <button
-
-                onClick={logout}
-
-                className="logout-mobile"
-
-            >
-
-                <LogOut size={22}/>
-
-                Logout
-
-            </button>
-
-
-
-        </div>
-
-        }
 
 
         </>
 
 
+
     );
+
 
 
 }
