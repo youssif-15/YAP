@@ -5,8 +5,8 @@ import {
 
   Home,
   Search,
+  History,
   Film,
-  Bell,
   User,
   Settings,
   LogOut
@@ -14,12 +14,15 @@ import {
 } from "lucide-react";
 
 
-import { usePathname, useRouter } from "next/navigation";
+import {
+
+  usePathname,
+  useRouter
+
+} from "next/navigation";
 
 
 import { supabase } from "@/lib/supabase";
-
-
 
 
 
@@ -38,8 +41,6 @@ export default function Sidebar(){
 
 
 
-
-
   async function handleLogout(){
 
 
@@ -50,9 +51,6 @@ export default function Sidebar(){
 
 
   }
-
-
-
 
 
 
@@ -77,13 +75,11 @@ export default function Sidebar(){
 
 
 
-
     if(!user){
 
       return;
 
     }
-
 
 
 
@@ -121,8 +117,6 @@ export default function Sidebar(){
 
 
 
-
-
     if(error){
 
       console.log(
@@ -142,9 +136,7 @@ export default function Sidebar(){
 
 
 
-
     if(profile?.username){
-
 
 
       router.push(
@@ -157,10 +149,7 @@ export default function Sidebar(){
     }
 
 
-
   }
-
-
 
 
 
@@ -170,34 +159,47 @@ export default function Sidebar(){
 
   const items = [
 
-
-
     {
+
       name:"Home",
+
       icon:<Home size={24}/>,
+
       path:"/home"
+
     },
 
-
-
     {
+
       name:"Search",
+
       icon:<Search size={24}/>,
+
       path:"/search"
+
     },
-
-
 
     {
-      name:"Reels",
-      icon:<Film size={24}/>,
-      path:"/reels"
+
+      name:"Flashbacks",
+
+      icon:<History size={24}/>,
+
+      path:"/flashbacks"
+
     },
 
+    {
 
+      name:"Reels",
+
+      icon:<Film size={24}/>,
+
+      path:"/reels"
+
+    }
 
   ];
-
 
 
 
@@ -222,38 +224,84 @@ export default function Sidebar(){
 
 
 
-      {
+        {
+
+          items.map((item,index)=>{
 
 
-      items.map((item,index)=>{
+            const active =
 
-
-
-        const active =
-
-        pathname === item.path;
-
+              pathname === item.path;
 
 
 
 
 
-
-        return(
-
-
-
-          <button
+            return(
 
 
 
-          key={index}
+              <button
+
+                key={index}
+
+                className={
+
+                  active
+
+                  ?
+
+                  "sidebar-item active"
+
+                  :
+
+                  "sidebar-item"
+
+                }
+
+                onClick={()=>router.push(item.path)}
+
+              >
 
 
+
+                {item.icon}
+
+
+
+                <span>
+
+                  {item.name}
+
+                </span>
+
+
+
+              </button>
+
+
+
+            );
+
+
+
+          })
+
+        }
+
+
+
+
+
+
+
+
+
+        <button
 
           className={
 
-            active
+            pathname.startsWith("/profile")
 
             ?
 
@@ -265,159 +313,74 @@ export default function Sidebar(){
 
           }
 
+          onClick={openProfile}
 
+        >
 
-          onClick={()=>router.push(item.path)}
 
 
+          <User size={24}/>
 
-          >
 
 
+          <span>
 
-            {item.icon}
+            Profile
 
+          </span>
 
 
-            <span>
 
-              {item.name}
+        </button>
 
-            </span>
 
 
 
-          </button>
 
 
 
-        );
 
+        <button
 
+          className={
 
-      })
+            pathname === "/settings"
 
+            ?
 
+            "sidebar-item active"
 
-      }
+            :
 
+            "sidebar-item"
 
+          }
 
+          onClick={()=>router.push("/settings")}
 
+        >
 
 
 
+          <Settings size={24}/>
 
 
 
+          <span>
 
+            Settings
 
-      <button
+          </span>
 
 
 
-      className={
-
-        pathname.startsWith("/profile")
-
-        ?
-
-        "sidebar-item active"
-
-        :
-
-        "sidebar-item"
-
-      }
-
-
-
-      onClick={openProfile}
-
-
-
-      >
-
-
-
-        <User size={24}/>
-
-
-
-        <span>
-
-          Profile
-
-        </span>
-
-
-
-      </button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <button
-
-
-
-      className={
-
-        pathname === "/settings"
-
-        ?
-
-        "sidebar-item active"
-
-        :
-
-        "sidebar-item"
-
-      }
-
-
-
-      onClick={()=>router.push("/settings")}
-
-
-
-      >
-
-
-
-        <Settings size={24}/>
-
-
-
-        <span>
-
-          Settings
-
-        </span>
-
-
-
-      </button>
-
-
-
-
+        </button>
 
 
 
 
 
       </div>
-
 
 
 
@@ -434,15 +397,9 @@ export default function Sidebar(){
 
         <button
 
+          className="sidebar-item logout-button"
 
-
-        className="sidebar-item logout-button"
-
-
-
-        onClick={handleLogout}
-
-
+          onClick={handleLogout}
 
         >
 
@@ -472,14 +429,10 @@ export default function Sidebar(){
 
 
 
-
-
     </aside>
 
 
 
   );
-
-
 
 }

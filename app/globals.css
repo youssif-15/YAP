@@ -9848,3 +9848,469 @@ body{
     border:0;
 
 }
+
+.flashback-users-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+
+.flashbacks-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+
+.flashback-filter{
+    padding:8px 20px;
+    border-radius:20px;
+    border:none;
+    cursor:pointer;
+}
+
+
+.flashback-filter.active{
+    background:#2563eb;
+    color:white;
+}
+
+.flashback-user-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px;
+
+    background:#111827;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.flashback-user-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+.flashback-user-avatar{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+
+.flashback-user-avatar.empty{
+
+    background:#374151;
+
+}
+
+
+.flashback-user-info h3{
+
+    margin:0;
+
+    font-size:15px;
+
+    color:white;
+
+}
+
+
+.flashback-user-info p{
+
+    margin:5px 0 0;
+
+    color:#9ca3af;
+
+    font-size:13px;
+
+}
+
+/* =========================
+   FLASHBACK PAGE
+========================= */
+
+
+.flashback-container{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+/* Create button */
+
+.create-flashback-button{
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(37,99,235,.25);
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #eff6ff,
+
+        #dbeafe
+
+    );
+
+    color:#1d4ed8;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    transition:.25s;
+
+}
+
+
+
+.create-flashback-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(37,99,235,.15);
+
+}
+
+
+
+/* Users cards */
+
+
+.flashback-users{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+}
+
+
+
+
+
+.flashback-user-card{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+
+.flashback-user-card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+
+
+.flashback-user-card.active{
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+
+.flashback-user-card img{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+
+
+
+
+.flashback-user-card span{
+
+    font-weight:600;
+
+    font-size:14px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+
+
+
+/* Posts area */
+
+
+.flashback-posts{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+
+
+/* Flashback post same as home */
+
+
+.flashback-post{
+
+    width:100%;
+
+}
+
+
+
+
+
+.flashback-post .post-media{
+
+    width:100%;
+
+    max-height:600px;
+
+    object-fit:cover;
+
+}
+
+
+
+
+
+/* uploader */
+
+
+.flashback-uploader{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+
+
+.flashback-uploader input[type="file"]{
+
+    padding:10px;
+
+    border:1px dashed #cbd5e1;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+.flashback-uploader textarea{
+
+    width:100%;
+
+    min-height:100px;
+
+    resize:none;
+
+    border:1px solid #d1d5db;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+
+
+
+
+.flashback-uploader textarea:focus{
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+
+.privacy-select{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+
+
+
+.privacy-select label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+.privacy-select select{
+
+    padding:10px;
+
+    border-radius:10px;
+
+    border:1px solid #d1d5db;
+
+}
+
+
+
+
+
+.flashback-uploader button{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+.flashback-uploader button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+    .flashback-users{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+}
+
