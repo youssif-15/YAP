@@ -65,7 +65,7 @@ export default function PublicRoute({children}){
                     display:"flex",
                     alignItems:"center",
                     justifyContent:"center",
-                    color:"#2563eb"
+                    color:"var(--primary)"
                 }}
             >
 

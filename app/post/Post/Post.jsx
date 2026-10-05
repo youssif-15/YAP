@@ -70,7 +70,9 @@ export default function Post({
     openComments = false,
 
 
-    refreshComments = 0
+    refreshComments = 0,
+
+    deferVideo = false
 
 
 
@@ -1220,7 +1222,14 @@ export default function Post({
 
 
 
-    <div className="post">
+    <div
+        className="post"
+        style={{
+            width: "100%",
+            maxWidth: "600px",
+            margin: "0 auto"
+        }}
+    >
 
 
 
@@ -2244,6 +2253,8 @@ export default function Post({
                 <PostLikes
 
                     postId={post.id}
+
+                    deferVideo={deferVideo}
 
                 />
 

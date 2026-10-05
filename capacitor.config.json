@@ -8,16 +8,16 @@
   },
   "plugins": {
     "StatusBar": {
-      "backgroundColor": "#0A84FF",
+      "backgroundColor": "#2563EB",
       "style": "LIGHT"
     },
     "NavigationBar": {
-      "backgroundColor": "#000000"
+      "backgroundColor": "#05070B"
     },
     "SplashScreen": {
       "launchShowDuration": 1500,
       "showSpinner": false,
-      "backgroundColor": "#0A84FF"
+      "backgroundColor": "#2563EB"
     }
   }
 }

@@ -2,19 +2,113 @@
 
   /* ========= Colors ========= */
 
+  color-scheme: light;
+
+  --white: #FFFFFF;
+  --media-background: #05070B;
+
+  --background: #F6F8FC;
+  --surface: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-muted: #F1F5F9;
+  --surface-hover: #EFF6FF;
+  --surface-active: #DBEAFE;
+  --surface-dark: #172033;
+
   --primary: #2563EB;
   --primary-hover: #1D4ED8;
+  --primary-active: #1E40AF;
+  --primary-light: #60A5FA;
+  --primary-subtle: #EFF6FF;
+  --primary-soft: #DBEAFE;
+  --primary-border: #BFDBFE;
+  --link: var(--primary);
+  --link-hover: var(--primary-hover);
 
-  --background: #F8FAFC;
-  --surface: #FFFFFF;
+  --button-primary-background: var(--primary);
+  --button-primary-hover: var(--primary-hover);
+  --button-primary-active: var(--primary-active);
+  --button-primary-text: var(--on-primary);
+  --button-secondary-background: var(--secondary);
+  --button-secondary-hover: #1F2937;
+  --button-secondary-text: var(--on-dark);
 
-  --border: #E5E7EB;
+  --input-background: var(--surface);
+  --input-text: var(--text);
+  --input-border: var(--border-strong);
+  --input-focus: var(--primary);
+  --hover: var(--surface-hover);
+  --active: var(--surface-active);
+  --disabled-surface: var(--surface-muted);
+  --disabled-text: var(--text-muted);
+  --loading: var(--primary);
+
+  --secondary: #334155;
+  --accent: #0F766E;
+  --accent-hover: #115E59;
+  --accent-bright: #14B8A6;
+  --accent-subtle: #CCFBF1;
 
   --text: #111827;
-  --text-secondary: #6B7280;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --on-dark: #FFFFFF;
+  --on-primary: #FFFFFF;
 
-  --success: #22C55E;
-  --danger: #EF4444;
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --border-primary: #BFDBFE;
+
+  --success: #15803D;
+  --success-hover: #166534;
+  --success-surface: #DCFCE7;
+  --warning: #92400E;
+  --warning-hover: #7C2D12;
+  --warning-surface: #FEF3C7;
+  --error: #B91C1C;
+  --error-hover: #991B1B;
+  --error-surface: #FEE2E2;
+  --danger: var(--error);
+
+  --skeleton: #E2E8F0;
+  --skeleton-highlight: #F8FAFC;
+  --timeline-track: #475569;
+  --timeline-buffered: #CBD5E1;
+  --timeline-played: var(--primary);
+
+  --overlay-05: rgba(15,23,42,.05);
+  --overlay-06: rgba(15,23,42,.06);
+  --overlay-08: rgba(15,23,42,.08);
+  --overlay-12: rgba(15,23,42,.12);
+  --overlay-15: rgba(15,23,42,.15);
+  --overlay-18: rgba(15,23,42,.18);
+  --overlay-20: rgba(15,23,42,.2);
+  --overlay-25: rgba(15,23,42,.25);
+  --overlay-28: rgba(15,23,42,.28);
+  --overlay-35: rgba(15,23,42,.35);
+  --overlay-40: rgba(15,23,42,.4);
+  --overlay-45: rgba(15,23,42,.45);
+  --overlay-50: rgba(15,23,42,.5);
+  --overlay-55: rgba(15,23,42,.55);
+  --overlay-60: rgba(15,23,42,.6);
+  --overlay-65: rgba(15,23,42,.65);
+  --overlay-70: rgba(15,23,42,.7);
+  --overlay-75: rgba(15,23,42,.75);
+  --overlay-80: rgba(15,23,42,.8);
+  --overlay-95: rgba(15,23,42,.95);
+  --white-overlay-05: rgba(255,255,255,.05);
+  --white-overlay-08: rgba(255,255,255,.08);
+  --white-overlay-10: rgba(255,255,255,.1);
+  --white-overlay-20: rgba(255,255,255,.2);
+  --white-overlay-25: rgba(255,255,255,.25);
+  --white-overlay-65: rgba(255,255,255,.65);
+  --primary-overlay-12: rgba(37,99,235,.12);
+  --primary-overlay-15: rgba(37,99,235,.15);
+  --primary-overlay-18: rgba(37,99,235,.18);
+  --primary-overlay-25: rgba(37,99,235,.25);
+  --primary-overlay-28: rgba(37,99,235,.28);
+  --primary-overlay-35: rgba(37,99,235,.35);
+  --accent-overlay-25: rgba(20,184,166,.25);
 
   /* ========= Radius ========= */
 
@@ -24,7 +118,100 @@
 
   /* ========= Shadows ========= */
 
-  --shadow-small: 0 2px 8px rgba(0,0,0,.05);
-  --shadow-medium: 0 6px 20px rgba(0,0,0,.08);
+  --shadow-small: 0 2px 8px var(--overlay-05);
+  --shadow-medium: 0 6px 20px var(--overlay-08);
+
+}
+
+[data-theme="dark"] {
+
+  color-scheme: dark;
+
+  --background: #0B1120;
+  --surface: #111827;
+  --surface-elevated: #172033;
+  --surface-muted: #1E293B;
+  --surface-hover: #1B2A41;
+  --surface-active: #203A5C;
+  --surface-dark: #05070B;
+
+  --primary: #1D4ED8;
+  --primary-hover: #1E40AF;
+  --primary-active: #1E3A8A;
+  --primary-light: #93C5FD;
+  --primary-subtle: #172554;
+  --primary-soft: #1E3A8A;
+  --primary-border: #1E40AF;
+  --link: #93C5FD;
+  --link-hover: #BFDBFE;
+
+  --button-primary-background: var(--primary);
+  --button-primary-hover: var(--primary-hover);
+  --button-primary-active: var(--primary-active);
+  --button-secondary-background: #334155;
+  --button-secondary-hover: #475569;
+
+  --input-background: var(--surface);
+  --input-text: var(--text);
+  --input-border: var(--border-strong);
+  --input-focus: var(--primary-light);
+
+  --secondary: #334155;
+  --accent: #0F766E;
+  --accent-hover: #115E59;
+  --accent-bright: #2DD4BF;
+  --accent-subtle: #134E4A;
+
+  --text: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --border: #334155;
+  --border-strong: #475569;
+  --border-primary: #1E40AF;
+
+  --success: #4ADE80;
+  --success-hover: #86EFAC;
+  --success-surface: #123322;
+  --warning: #FBBF24;
+  --warning-hover: #FDE68A;
+  --warning-surface: #3A2C16;
+  --error: #F87171;
+  --error-hover: #FCA5A5;
+  --error-surface: #3F1D2A;
+
+  --skeleton: #243247;
+  --skeleton-highlight: #334155;
+  --timeline-track: #475569;
+  --timeline-buffered: #94A3B8;
+  --timeline-played: #60A5FA;
+
+  --overlay-05: rgba(2,6,23,.05);
+  --overlay-06: rgba(2,6,23,.06);
+  --overlay-08: rgba(2,6,23,.08);
+  --overlay-12: rgba(2,6,23,.12);
+  --overlay-15: rgba(2,6,23,.15);
+  --overlay-18: rgba(2,6,23,.18);
+  --overlay-20: rgba(2,6,23,.2);
+  --overlay-25: rgba(2,6,23,.25);
+  --overlay-28: rgba(2,6,23,.28);
+  --overlay-35: rgba(2,6,23,.35);
+  --overlay-40: rgba(2,6,23,.4);
+  --overlay-45: rgba(2,6,23,.45);
+  --overlay-50: rgba(2,6,23,.5);
+  --overlay-55: rgba(2,6,23,.55);
+  --overlay-60: rgba(2,6,23,.6);
+  --overlay-65: rgba(2,6,23,.65);
+  --overlay-70: rgba(2,6,23,.7);
+  --overlay-75: rgba(2,6,23,.75);
+  --overlay-80: rgba(2,6,23,.8);
+  --overlay-95: rgba(2,6,23,.95);
+  --primary-overlay-12: rgba(147,197,253,.12);
+  --primary-overlay-15: rgba(147,197,253,.15);
+  --primary-overlay-18: rgba(147,197,253,.18);
+  --primary-overlay-25: rgba(147,197,253,.25);
+  --primary-overlay-28: rgba(147,197,253,.28);
+  --primary-overlay-35: rgba(147,197,253,.35);
+  --accent-overlay-25: rgba(45,212,191,.25);
 
 }

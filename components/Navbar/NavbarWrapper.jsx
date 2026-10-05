@@ -9,6 +9,8 @@ import Navbar from "./Navbar";
 
 import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
 
+import ThemeToggle from "@/components/Theme/ThemeToggle";
+
 
 
 
@@ -75,7 +77,7 @@ export default function NavbarWrapper(){
     ){
 
 
-        return null;
+        return <ThemeToggle floating/>;
 
 
     }

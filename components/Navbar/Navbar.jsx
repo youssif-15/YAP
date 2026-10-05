@@ -38,6 +38,8 @@ import CreateMenu from "@/components/CreateMenu/CreateMenu";
 
 import NotificationBell from "@/components/Notifications/NotificationBell";
 
+import ThemeToggle from "@/components/Theme/ThemeToggle";
+
 
 
 
@@ -265,6 +267,8 @@ export default function Navbar({
 
         }
                 <div className="actions">
+
+                  <ThemeToggle/>
 
 
 

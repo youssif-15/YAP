@@ -18,7 +18,6 @@ import {
     User,
     Settings,
     LogOut
-
 } from "lucide-react";
 
 
@@ -38,6 +37,8 @@ import {
 
 
 import NotificationBell from "@/components/Notifications/NotificationBell";
+
+import ThemeToggle from "@/components/Theme/ThemeToggle";
 
 
 
@@ -455,8 +456,7 @@ export default function MobileNavbar(){
 
 
                     Settings
-
-
+                    LogOut
 
                 </button>
 
@@ -499,6 +499,7 @@ export default function MobileNavbar(){
 
 
 
+                    <ThemeToggle showLabel/>
 
 
             </div>

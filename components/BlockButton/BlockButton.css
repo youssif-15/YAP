@@ -28,29 +28,29 @@
 
 .block-button{
 
-    background:#ef4444;
+    background:var(--error);
 
-    color:#fff;
+    color:var(--surface);
 
 }
 
 .block-button:hover{
 
-    background:#dc2626;
+    background:var(--error-hover);
 
 }
 
 .unblock-button{
 
-    background:#374151;
+    background:var(--text-secondary);
 
-    color:#fff;
+    color:var(--surface);
 
 }
 
 .unblock-button:hover{
 
-    background:#4b5563;
+    background:var(--text-secondary);
 
 }
 
@@ -67,7 +67,7 @@
 .block-modal-overlay{
     position:fixed;
     inset:0;
-    background:rgba(15,23,42,.28);
+    background:var(--overlay-28);
     backdrop-filter:blur(8px);
     display:flex;
     justify-content:center;
@@ -79,13 +79,13 @@
 .block-modal{
     width:430px;
     max-width:calc(100% - 32px);
-    background:#ffffff;
-    border:1px solid #dbeafe;
+    background:var(--surface);
+    border:1px solid var(--primary-soft);
     border-radius:22px;
     padding:28px;
     text-align:center;
     animation:popup .22s ease;
-    box-shadow:0 25px 70px rgba(59,130,246,.15);
+    box-shadow:0 25px 70px var(--primary-overlay-15);
 }
 
 .block-modal-icon{
@@ -96,26 +96,26 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#fee2e2;
-    color:#dc2626;
+    background:var(--error-surface);
+    color:var(--error-hover);
 }
 
 .block-modal h3{
     margin:0;
     font-size:23px;
     font-weight:700;
-    color:#0f172a;
+    color:var(--text);
 }
 
 .block-modal p{
     margin:14px 0 0;
-    color:#64748b;
+    color:var(--text-muted);
     line-height:1.7;
     font-size:15px;
 }
 
 .block-modal strong{
-    color:#2563eb;
+    color:var(--primary);
     font-weight:700;
 }
 
@@ -137,22 +137,22 @@
 }
 
 .block-modal-cancel{
-    background:#eff6ff;
-    color:#2563eb;
-    border:1px solid #bfdbfe;
+    background:var(--primary-subtle);
+    color:var(--primary);
+    border:1px solid var(--primary-border);
 }
 
 .block-modal-cancel:hover{
-    background:#dbeafe;
+    background:var(--primary-soft);
 }
 
 .block-modal-confirm{
-    background:#ef4444;
-    color:#fff;
+    background:var(--error);
+    color:var(--surface);
 }
 
 .block-modal-confirm:hover{
-    background:#dc2626;
+    background:var(--error-hover);
     transform:translateY(-1px);
 }
 

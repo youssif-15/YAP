@@ -22,7 +22,7 @@ export default function ImageCropper({
                 position: "relative",
                 width: "100%",
                 height: "420px",
-                background: "#111",
+                background: "var(--surface-dark)",
                 borderRadius: "20px",
                 overflow: "hidden"
             }}

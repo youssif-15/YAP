@@ -28,7 +28,7 @@
 
     font-weight:600;
 
-    color:#666;
+    color:var(--text-muted);
 
 }
 
@@ -46,7 +46,7 @@
 
     padding-bottom:28px;
 
-    border-bottom:1px solid #e5e7eb;
+    border-bottom:1px solid var(--border);
 
 }
 
@@ -96,7 +96,7 @@
 
     font-weight:700;
 
-    color:#111827;
+    color:var(--text);
 
     line-height:1.1;
 
@@ -106,7 +106,7 @@
 
     margin-top:2px;
 
-    color:#6b7280;
+    color:var(--text-muted);
 
     font-size:15px;
 
@@ -139,10 +139,10 @@
 
     object-fit:cover;
 
-    border:5px solid white;
+    border:5px solid var(--white);
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.08);
+        0 8px 25px var(--overlay-08);
 
     position:relative;
 
@@ -152,13 +152,13 @@
 
 .profile-avatar-empty{
 
-    background:#2563eb;
+    background:var(--primary);
 
 }
 
 .profile-bio{
 
-    color:#374151;
+    color:var(--text-secondary);
 
     font-size:15px;
 
@@ -212,7 +212,7 @@
 
     font-weight:700;
 
-    color:#111827;
+    color:var(--text);
 
 }
 
@@ -222,7 +222,7 @@
 
     z-index:5;
 
-    color:#6b7280;
+    color:var(--text-muted);
 
     font-size:14px;
 
@@ -284,9 +284,9 @@
 
     filter:
 
-        drop-shadow(0 0 5px rgba(37,99,235,.35))
+        drop-shadow(0 0 5px var(--primary-overlay-35))
 
-        drop-shadow(0 0 10px rgba(56,189,248,.25));
+        drop-shadow(0 0 10px var(--accent-overlay-25));
 
 }
 
@@ -364,43 +364,43 @@
 
 .follow-button{
 
-    background:#2563eb;
+    background:var(--accent);
 
-    color:white;
+    color:var(--white);
 
 }
 
 .follow-button:hover{
 
-    background:#1d4ed8;
+    background:var(--accent-hover);
 
 }
 
 .following-button{
 
-    background:#f3f4f6;
+    background:var(--surface-muted);
 
-    color:#111827;
+    color:var(--accent);
 
 }
 
 .following-button:hover{
 
-    background:#e5e7eb;
+    background:var(--accent-subtle);
 
 }
 
 .edit-profile-button{
 
-    background:#2563eb;
+    background:var(--primary);
 
-    color:white;
+    color:var(--white);
 
 }
 
 .edit-profile-button:hover{
 
-    background:#1d4ed8;
+    background:var(--primary-hover);
 
 }
 
@@ -420,7 +420,7 @@
 
     margin:30px 0 25px;
 
-    border-bottom:1px solid #e5e7eb;
+    border-bottom:1px solid var(--border);
 
 }
 
@@ -442,7 +442,7 @@
 
     border:none;
 
-    color:#6b7280;
+    color:var(--text-muted);
 
     font-size:15px;
 
@@ -456,13 +456,13 @@
 
 .profile-tabs button:hover{
 
-    color:#111827;
+    color:var(--text);
 
 }
 
 .profile-tabs button.active{
 
-    color:#2563eb;
+    color:var(--primary);
 
 }
 
@@ -482,7 +482,7 @@
 
     border-radius:10px;
 
-    background:#2563eb;
+    background:var(--primary);
 
 }
 
@@ -524,7 +524,7 @@
 
     min-height:180px;
 
-    color:#6b7280;
+    color:var(--text-muted);
 
     font-size:16px;
 
@@ -600,28 +600,28 @@
 
 .block-button{
 
-    background:#ef4444;
+    background:var(--error);
 
-    color:white;
+    color:var(--white);
 
 }
 
 .block-button:hover{
 
-    background:#dc2626;
+    background:var(--error-hover);
 
 }
 
 .unblock-button{
 
-    background:#10b981;
+    background:var(--success);
 
-    color:white;
+    color:var(--white);
 
 }
 
 .unblock-button:hover{
 
-    background:#059669;
+    background:var(--success);
 
 }

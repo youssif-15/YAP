@@ -9,7 +9,7 @@
 
     min-height:250px;
 
-    color:#9ca3af;
+    color:var(--text-muted);
 
     font-size:16px;
 
@@ -53,7 +53,7 @@
 
 .follow-user:hover{
 
-    background:rgba(255,255,255,.05);
+    background:var(--white-overlay-05);
 
 }
 
@@ -69,9 +69,9 @@
 
     flex-shrink:0;
 
-    border:2px solid #38bdf8;
+    border:2px solid var(--accent-bright);
 
-    background:#1f2937;
+    background:var(--text-secondary);
 
 }
 
@@ -89,7 +89,7 @@
 
 .follow-username{
 
-    color:#000;
+    color:var(--media-background);
 
     font-size:15px;
 
@@ -105,7 +105,7 @@
 
 .follow-name{
 
-    color:#9ca3af;
+    color:var(--text-muted);
 
     font-size:14px;
 

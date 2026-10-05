@@ -1,5 +1,8 @@
 import "./globals.css";
 
+import { cookies } from "next/headers";
+
+import ThemeProvider from "@/components/Theme/ThemeProvider";
 
 import NavbarWrapper from "@/components/Navbar/NavbarWrapper";
 
@@ -33,19 +36,27 @@ export const metadata = {
 
 
 
-export default function RootLayout({children}){
+export default async function RootLayout({children}){
+
+    const cookieStore = await cookies();
+
+    const theme = cookieStore.get("theme")?.value === "dark"
+        ? "dark"
+        : "light";
 
 
     return(
 
 
-        <html lang="en">
+        <html lang="en" data-theme={theme}>
 
 
             <body>
 
 
-                <AuthProvider>
+                <ThemeProvider initialTheme={theme}>
+
+                    <AuthProvider>
 
 
                     <BackButton/>
@@ -66,7 +77,9 @@ export default function RootLayout({children}){
                     <Offline/>
 
 
-                </AuthProvider>
+                    </AuthProvider>
+
+                </ThemeProvider>
 
 
             </body>

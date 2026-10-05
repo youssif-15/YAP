@@ -17,6 +17,8 @@ import {
     supabase
 } from "@/lib/supabase";
 
+import { Capacitor } from "@capacitor/core";
+
 export default function NotificationBell(){
 
     const router = useRouter();
@@ -27,11 +29,49 @@ export default function NotificationBell(){
 
     const [unread,setUnread] = useState(0);
 
+    const [browserPermission,setBrowserPermission] = useState("default");
+
+    const [browserNotificationsSupported,setBrowserNotificationsSupported] = useState(false);
+
     useEffect(()=>{
 
         loadNotifications();
 
+        if(
+
+            !Capacitor.isNativePlatform() &&
+
+            "Notification" in window
+
+        ){
+
+            setBrowserNotificationsSupported(true);
+
+            setBrowserPermission(Notification.permission);
+
+        }
+
     },[]);
+
+
+    async function enableBrowserNotifications(){
+
+
+        if(!browserNotificationsSupported){
+
+            return;
+
+        }
+
+
+        setBrowserPermission(
+
+            await Notification.requestPermission()
+
+        );
+
+
+    }
 
     async function loadNotifications(){
 
@@ -268,6 +308,41 @@ export default function NotificationBell(){
                     Notifications
 
                 </h3>
+
+
+                {
+
+                browserNotificationsSupported &&
+
+                browserPermission !== "granted" &&
+
+                <div className="notification-permission">
+
+                    {
+
+                    browserPermission === "denied"
+
+                    ?
+
+                    <p>Browser notifications are blocked. Allow them in your browser settings.</p>
+
+                    :
+
+                    <button
+
+                        onClick={enableBrowserNotifications}
+
+                    >
+
+                        Enable browser notifications
+
+                    </button>
+
+                    }
+
+                </div>
+
+                }
 
                 {
 

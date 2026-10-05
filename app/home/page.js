@@ -6,6 +6,7 @@ import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 
 import { 
     useEffect,
+    useRef,
     useState
 } from "react";
 
@@ -42,6 +43,7 @@ import HomeSkeleton from "@/components/Skeleton/HomeSkeleton";
 
 
 export default function Home(){
+    const POSTS_PAGE_SIZE = 6;
 
 
 
@@ -51,6 +53,17 @@ export default function Home(){
 
     const [loading,setLoading] = useState(true);
 
+    const [loadingMore,setLoadingMore] = useState(false);
+
+    const [hasMore,setHasMore] = useState(true);
+
+    const cursorRef = useRef(null);
+
+    const hasMoreRef = useRef(true);
+
+    const loadingMoreRef = useRef(false);
+
+    const loadMoreTriggerRef = useRef(null);
 
 
 
@@ -59,7 +72,34 @@ export default function Home(){
 
 
 
-    async function getPosts(){
+
+    async function getPosts(initial=false){
+
+        if(initial){
+
+            setLoading(true);
+
+            cursorRef.current = null;
+
+            hasMoreRef.current = true;
+
+            setHasMore(true);
+
+        }
+        else if(loadingMoreRef.current || !hasMoreRef.current){
+
+            return;
+
+        }
+        else{
+
+            loadingMoreRef.current = true;
+
+            setLoadingMore(true);
+
+        }
+
+        const cursor = initial ? null : cursorRef.current;
 
 
 
@@ -79,6 +119,14 @@ export default function Home(){
 
         .select("*")
 
+        .or(
+            cursor
+                ? `created_at.lt.${cursor.created_at},and(created_at.eq.${cursor.created_at},id.lt.${cursor.id})`
+                : "id.not.is.null"
+        )
+
+        .limit(POSTS_PAGE_SIZE)
+
 
 
         .order(
@@ -93,7 +141,10 @@ export default function Home(){
 
             }
 
-        );
+        )
+
+        .order("id",{ascending:false});
+
 
 
 
@@ -112,6 +163,14 @@ export default function Home(){
                 error
 
             );
+
+            hasMoreRef.current = false;
+
+            setHasMore(false);
+
+            loadingMoreRef.current = false;
+
+            setLoadingMore(false);
 
 
 
@@ -336,19 +395,59 @@ export default function Home(){
 
 
 
-        setPosts(
+        const lastPost = postsData[postsData.length - 1];
 
+        if(lastPost){
 
-            postsWithProfiles
+            cursorRef.current = {
+                created_at:lastPost.created_at,
+                id:lastPost.id
+            };
 
+        }
 
-        );
+        const moreAvailable = postsData.length === POSTS_PAGE_SIZE;
 
+        hasMoreRef.current = moreAvailable;
 
+        setHasMore(moreAvailable);
+
+        setPosts(previousPosts=>{
+
+            const existingIds = new Set(
+                previousPosts.map(post=>post.id)
+            );
+
+            const newPosts = postsWithProfiles.filter(
+                post=>!existingIds.has(post.id)
+            );
+
+            const combinedPosts = initial
+                ? [...newPosts,...previousPosts]
+                : [...previousPosts,...newPosts];
+
+            return combinedPosts.sort((left,right)=>{
+
+                const dateDifference =
+                    new Date(right.created_at) - new Date(left.created_at);
+
+                if(dateDifference !== 0){
+
+                    return dateDifference;
+
+                }
+
+                return String(right.id).localeCompare(String(left.id));
+
+            });
+
+        });
 
         setLoading(false);
 
+        loadingMoreRef.current = false;
 
+        setLoadingMore(false);
 
     }
 
@@ -371,148 +470,35 @@ export default function Home(){
 
 
 
-        getPosts();
-
-
+        getPosts(true);
 
     },[]);
 
-
-
-
-
-
-
-
-
-
-
-
-    useEffect(()=>{
-
-
-
-
-
-        const channel = supabase
-
-
-
-
-
-        .channel("posts-feed")
-
-
-
-
-
-        .on(
-
-
-
-
-
-            "postgres_changes",
-
-
-
-
-
-            {
-
-                event:"INSERT",
-
-                schema:"public",
-
-                table:"posts"
-
-
-            },
-
-
-
-
-
-            async(payload)=>{
-
-
-
-
-
-                const newPost = payload.new;
-
-
-
-
-
-
-
-
-
-                const [
-
-
-
-                    profileResult,
-
-                    userResult
-
-
-
-                ] = await Promise.all([
-
-
-
-
-
-
-
-                    supabase
-
-
-
-                    .from("profiles")
-
-
-
-                    .select(
-
-
-                        "username, avatar_url, is_owner"
-
-
-                    )
-
-
-
-                    .eq(
-
-
-                        "id",
-
-
-                        newPost.user_id
-
-
-                    )
-
-
-
-                    .single(),
-
-
-
-
-
-
-
-                    supabase.auth.getUser()
-
-
-
-
-
-
+        useEffect(()=>{
+
+            const channel = supabase
+            .channel("posts-feed")
+            .on(
+                "postgres_changes",
+                {
+                    event:"INSERT",
+                    schema:"public",
+                    table:"posts"
+                },
+                async(payload)=>{
+
+                    const newPost = payload.new;
+
+                    const [
+                        profileResult,
+                        userResult
+                    ] = await Promise.all([
+                        supabase
+                        .from("profiles")
+                        .select("username, avatar_url, is_owner")
+                        .eq("id",newPost.user_id)
+                        .single(),
+                        supabase.auth.getUser()
                 ]);
 
 
@@ -578,65 +564,27 @@ export default function Home(){
 
                     )
 
-
-
-
                     .eq(
-
 
                         "post_id",
 
-
                         newPost.id
-
-
                     )
-
-
-
-
                     .maybeSingle();
 
-
-
-
-
-
-
                     saved = !!data;
-
-
 
                 }
 
 
 
-
-
-
-
-
-
                 setPosts(prev=>{
-
-
-
-
 
                     const exists = prev.some(
 
-
-
                         post=>post.id === newPost.id
 
-
-
                     );
-
-
-
-
-
 
 
                     if(exists){
@@ -746,6 +694,42 @@ export default function Home(){
 
 
 
+    useEffect(()=>{
+
+        const target = loadMoreTriggerRef.current;
+
+        if(!target || loading || loadingMore || !hasMore){
+
+            return;
+
+        }
+
+        const observer = new IntersectionObserver(
+
+            entries=>{
+
+                if(entries.some(entry=>entry.isIntersecting)){
+
+                    getPosts();
+
+                }
+
+            },
+
+            {
+
+                rootMargin:"400px"
+
+            }
+
+        );
+
+        observer.observe(target);
+
+        return ()=>observer.disconnect();
+
+    },[loading,loadingMore,hasMore,posts.length]);
+
     return(
 
 
@@ -804,7 +788,7 @@ export default function Home(){
                         loading &&
 
 
-                        <HomeSkeleton/>
+                        <HomeSkeleton showStories={false}/>
 
 
                     }
@@ -857,47 +841,26 @@ export default function Home(){
 
                                 post={post}
 
+                                deferVideo
+
 
 
 
 
                                 onDelete={(id)=>{
-
-
-
-
-
-
                                     setPosts(prev=>
-
-
-
                                         prev.filter(
-
-
-
                                             item=>item.id !== id
-
-
-
                                         )
-
-
-
                                     );
-
-
-
-
-
                                 }}
-
-
-
-
-
-
                             />
+
+
+
+
+
+
 
 
 
@@ -916,6 +879,12 @@ export default function Home(){
 
 
 
+
+                    {!loading && posts.length > 0 && hasMore && (
+                        <div ref={loadMoreTriggerRef}/>
+                    )}
+
+                    {loadingMore && <HomeSkeleton showStories={false}/>}
 
                 </main>
 

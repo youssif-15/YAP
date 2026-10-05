@@ -906,7 +906,7 @@ export default function ProfileHeader({
 
                                 offset="0%"
 
-                                stopColor="#38bdf8"
+                                stopColor="var(--accent-bright)"
 
                             />
 
@@ -916,7 +916,7 @@ export default function ProfileHeader({
 
                                 offset="25%"
 
-                                stopColor="#60a5fa"
+                                stopColor="var(--primary-light)"
 
                             />
 
@@ -926,7 +926,7 @@ export default function ProfileHeader({
 
                                 offset="50%"
 
-                                stopColor="#3b82f6"
+                                stopColor="var(--primary)"
 
                             />
 
@@ -936,7 +936,7 @@ export default function ProfileHeader({
 
                                 offset="75%"
 
-                                stopColor="#2563eb"
+                                stopColor="var(--primary)"
 
                             />
 
@@ -946,7 +946,7 @@ export default function ProfileHeader({
 
                                 offset="100%"
 
-                                stopColor="#1d4ed8"
+                                stopColor="var(--primary-hover)"
 
                             />
 
@@ -1130,7 +1130,7 @@ export default function ProfileHeader({
 
 
 
-                                stopColor="#38bdf8"
+                                stopColor="var(--accent-bright)"
 
 
 
@@ -1147,7 +1147,7 @@ export default function ProfileHeader({
 
 
 
-                                stopColor="#60a5fa"
+                                stopColor="var(--primary-light)"
 
 
 
@@ -1164,7 +1164,7 @@ export default function ProfileHeader({
 
 
 
-                                stopColor="#3b82f6"
+                                stopColor="var(--primary)"
 
 
 
@@ -1181,7 +1181,7 @@ export default function ProfileHeader({
 
 
 
-                                stopColor="#2563eb"
+                                stopColor="var(--primary)"
 
 
 
@@ -1198,7 +1198,7 @@ export default function ProfileHeader({
 
 
 
-                                stopColor="#1d4ed8"
+                                stopColor="var(--primary-hover)"
 
 
 

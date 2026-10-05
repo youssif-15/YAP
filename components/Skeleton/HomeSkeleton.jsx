@@ -1,4 +1,7 @@
-export default function HomeSkeleton(){
+export default function HomeSkeleton({
+    showStories=true,
+    postCount=2
+}={}){
 
 
     return(
@@ -8,7 +11,7 @@ export default function HomeSkeleton(){
 
 
 
-            <div className="skeleton-story-row">
+            {showStories && <div className="skeleton-story-row">
 
 
                 {
@@ -28,7 +31,7 @@ export default function HomeSkeleton(){
                 }
 
 
-            </div>
+            </div>}
 
 
 
@@ -37,7 +40,7 @@ export default function HomeSkeleton(){
 
 
             {
-                [1,2].map(i=>(
+                Array.from({length:postCount},(_,i)=>(
 
 
                     <div

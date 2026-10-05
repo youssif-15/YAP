@@ -7,12 +7,14 @@ export default function AppSetup(){
 
     useEffect(()=>{
 
-        async function setup(){
+        async function syncStatusBar(){
 
             try{
 
                 await StatusBar.setBackgroundColor({
-                    color:"#0A84FF"
+                    color:getComputedStyle(document.documentElement)
+                        .getPropertyValue("--primary")
+                        .trim()
                 });
 
                 await StatusBar.show();
@@ -27,7 +29,17 @@ export default function AppSetup(){
         }
 
 
-        setup();
+        function handleThemeChange(){
+            syncStatusBar();
+        }
+
+        syncStatusBar();
+
+        window.addEventListener("theme-change",handleThemeChange);
+
+        return ()=>{
+            window.removeEventListener("theme-change",handleThemeChange);
+        };
 
     },[]);
 

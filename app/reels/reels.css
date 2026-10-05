@@ -4,7 +4,7 @@
 
     height:100dvh;
 
-    background:#000;
+    background:var(--media-background);
 
     position:relative;
 
@@ -28,7 +28,7 @@
 
     object-fit:contain;
 
-    background:#000;
+    background:var(--media-background);
 
 }
 
@@ -56,7 +56,7 @@
     padding:25px;
 
 
-    color:white;
+    color:var(--white);
 
 
     pointer-events:none;
@@ -68,7 +68,7 @@
 
         transparent,
 
-        rgba(0,0,0,.6)
+        var(--overlay-60)
 
     );
 
@@ -121,7 +121,7 @@
     object-fit:cover;
 
 
-    border:2px solid white;
+    border:2px solid var(--white);
 
 
 }
@@ -217,10 +217,10 @@
     border:none;
 
 
-    background:rgba(0,0,0,.45);
+    background:var(--overlay-45);
 
 
-    color:white;
+    color:var(--white);
 
 
     display:flex;
@@ -318,10 +318,10 @@
     border:none;
 
 
-    background:rgba(0,0,0,.45);
+    background:var(--overlay-45);
 
 
-    color:white;
+    color:var(--white);
 
 
     display:flex;
@@ -396,10 +396,10 @@
     border:none;
 
 
-    background:rgba(0,0,0,.5);
+    background:var(--overlay-50);
 
 
-    color:white;
+    color:var(--white);
 
 
     display:flex;
@@ -444,7 +444,7 @@
 
     height:6px;
 
-    background:rgba(255,255,255,.25);
+    background:var(--white-overlay-25);
 
     z-index:150;
 
@@ -486,11 +486,11 @@
 
         90deg,
 
-        #003cff,
+        var(--primary),
 
-        #006dff,
+        var(--primary),
 
-        #00d4ff
+        var(--accent-bright)
 
     );
 
@@ -539,7 +539,7 @@
     border-radius:50%;
 
 
-    background:white;
+    background:var(--surface);
 
 
     opacity:0;
@@ -619,10 +619,10 @@
     height:100dvh;
 
 
-    background:#111;
+    background:var(--surface-dark);
 
 
-    color:white;
+    color:var(--white);
 
 
     z-index:300;
@@ -637,7 +637,7 @@
     box-shadow:
 
 
-    -10px 0 30px rgba(0,0,0,.5);
+    -10px 0 30px var(--overlay-50);
 
 
     animation:
@@ -695,10 +695,10 @@ to{
     border:none;
 
 
-    background:#222;
+    background:var(--surface-dark);
 
 
-    color:white;
+    color:var(--white);
 
 
     display:flex;
@@ -738,7 +738,7 @@ to{
     height:100dvh;
 
 
-    background:#000;
+    background:var(--media-background);
 
 
     display:flex;
@@ -772,11 +772,11 @@ to{
 
         110deg,
 
-        #111 8%,
+        var(--surface-dark) 8%,
 
-        #222 18%,
+        var(--surface-dark) 18%,
 
-        #111 33%
+        var(--surface-dark) 33%
 
     );
 
@@ -837,10 +837,10 @@ to{
     height:100dvh;
 
 
-    background:#000;
+    background:var(--media-background);
 
 
-    color:white;
+    color:var(--white);
 
 
     display:flex;
@@ -872,10 +872,10 @@ to{
     height:100dvh;
 
 
-    background:#000;
+    background:var(--media-background);
 
 
-    color:white;
+    color:var(--white);
 
 
     display:flex;
@@ -968,7 +968,7 @@ to{
 
     margin:0;
 
-    color:white;
+    color:var(--white);
 
     font-size:16px;
 
@@ -988,7 +988,7 @@ to{
 
     margin-top:8px;
 
-    color:rgba(255,255,255,.65);
+    color:var(--white-overlay-65);
 
     font-size:13px;
 
@@ -1162,7 +1162,7 @@ body{
 
     height:100dvh !important;
 
-    background:rgba(0,0,0,.45) !important;
+    background:var(--overlay-45) !important;
 
     display:flex !important;
 
@@ -1190,9 +1190,9 @@ body{
     max-height:70vh !important;
 
 
-    background:#111 !important;
+    background:var(--surface-dark) !important;
 
-    color:white !important;
+    color:var(--white) !important;
 
 
     border-radius:20px !important;
@@ -1203,7 +1203,7 @@ body{
 
     box-shadow:
 
-    0 20px 60px rgba(0,0,0,.6);
+    0 20px 60px var(--overlay-60);
 
 
 }
@@ -1221,7 +1221,7 @@ body{
     padding:15px;
 
 
-    border-bottom:1px solid rgba(255,255,255,.1);
+    border-bottom:1px solid var(--white-overlay-10);
 
 
 }
@@ -1237,7 +1237,7 @@ body{
     margin:0;
 
 
-    color:white;
+    color:var(--white);
 
 
 }
@@ -1281,7 +1281,7 @@ body{
     padding:10px;
 
 
-    color:white;
+    color:var(--white);
 
 
     border-radius:12px;
@@ -1297,7 +1297,7 @@ body{
 .reel-like-box .likes-user:hover{
 
 
-    background:rgba(255,255,255,.08);
+    background:var(--white-overlay-08);
 
 
 }

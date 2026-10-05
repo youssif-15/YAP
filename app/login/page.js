@@ -433,7 +433,7 @@ export default function Login(){
                             style={{
 
 
-                                color:"#2563eb",
+                                color:"var(--primary)",
 
                                 fontSize:"14px",
 

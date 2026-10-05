@@ -29,7 +29,9 @@ export default function PostMedia({
 
     onLike,
 
-    type
+    type,
+
+    deferVideo=false
 
 }){
 
@@ -516,6 +518,8 @@ export default function PostMedia({
 
                     onLike={onLike}
 
+                    deferLoad={deferVideo}
+
                 />
 
 
@@ -539,7 +543,7 @@ export default function PostMedia({
     return(
 
 
-        <div className="post-media">
+        <div className="post-media post-image-media">
 
 
 

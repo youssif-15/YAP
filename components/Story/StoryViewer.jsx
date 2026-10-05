@@ -5,6 +5,8 @@ import {
 
     useEffect,
 
+    useRef,
+
     useState
 
 } from "react";
@@ -76,6 +78,23 @@ export default function StoryViewer({
     const [viewAdded,setViewAdded] = useState(false);
 
 
+    const videoRef = useRef(null);
+
+    const activePointerId = useRef(null);
+
+    const holdStartedAt = useRef(0);
+
+    const holdOnNavigationArea = useRef(false);
+
+    const holdActive = useRef(false);
+
+    const pendingHoldTimer = useRef(null);
+
+    const suppressNavigationClick = useRef(false);
+
+    const resumeVideoAfterHold = useRef(false);
+
+
 
 
     const group = groups[groupIndex];
@@ -119,6 +138,26 @@ export default function StoryViewer({
 
         getUser();
 
+
+
+    },[]);
+
+
+
+
+
+    useEffect(()=>{
+
+
+        return()=>{
+
+            if(pendingHoldTimer.current){
+
+                clearTimeout(pendingHoldTimer.current);
+
+            }
+
+        };
 
 
     },[]);
@@ -378,7 +417,13 @@ export default function StoryViewer({
 
 
 
-        if(holding){
+        if(
+
+            holding ||
+
+            story?.media_type === "video"
+
+        ){
 
             return;
 
@@ -440,7 +485,9 @@ export default function StoryViewer({
 
         storyIndex,
 
-        holding
+        holding,
+
+        story?.media_type
 
     ]);
 
@@ -452,10 +499,197 @@ export default function StoryViewer({
 
 
 
-    function startHold(){
+    function syncVideoProgress(event){
 
+
+        const video = event.currentTarget;
+
+        if(
+
+            !Number.isFinite(video.duration) ||
+
+            video.duration <= 0 ||
+
+            !Number.isFinite(video.currentTime)
+
+        ){
+
+            return;
+
+        }
+
+
+        setProgress(
+
+            Math.min(
+
+                video.currentTime / video.duration * 100,
+
+                100
+
+            )
+
+        );
+
+
+    }
+
+
+
+
+
+    function handleVideoPlay(event){
+
+
+        if(holdActive.current){
+
+            event.currentTarget.pause();
+
+        }
+
+
+    }
+
+
+
+
+
+    function handleVideoEnded(){
+
+
+        setProgress(100);
+
+        next();
+
+
+    }
+
+
+
+
+
+    function handleViewerClickCapture(event){
+
+
+        if(
+
+            suppressNavigationClick.current &&
+
+            event.target instanceof Element &&
+
+            event.target.closest(
+
+                ".story-left, .story-right"
+
+            )
+
+        ){
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            suppressNavigationClick.current = false;
+
+        }
+
+
+    }
+
+
+
+
+
+    function activateHold(){
+
+
+        holdActive.current = true;
 
         setHolding(true);
+
+
+        const video = videoRef.current;
+
+        resumeVideoAfterHold.current = !!video && (
+
+            !video.paused ||
+
+            video.autoplay
+
+        );
+
+        if(video){
+
+            video.pause();
+
+        }
+
+
+    }
+
+
+
+
+
+    function startHold(event){
+
+
+        const target = event.target;
+
+        if(
+
+            !(target instanceof Element) ||
+
+            target.closest(
+
+                "button, a, input, select, textarea, [role='button'], .story-bars, .story-header"
+
+            ) ||
+
+            activePointerId.current !== null
+
+        ){
+
+            return;
+
+        }
+
+
+        activePointerId.current = event.pointerId;
+
+        holdStartedAt.current = Date.now();
+
+        holdOnNavigationArea.current = !!target.closest(
+
+            ".story-left, .story-right"
+
+        );
+
+        suppressNavigationClick.current = false;
+
+        holdActive.current = false;
+
+        if(holdOnNavigationArea.current){
+
+            pendingHoldTimer.current = setTimeout(()=>{
+
+                pendingHoldTimer.current = null;
+
+                if(activePointerId.current === event.pointerId){
+
+                    activateHold();
+
+                }
+
+            },250);
+
+        }
+
+        else{
+
+            activateHold();
+
+        }
 
 
     }
@@ -466,10 +700,74 @@ export default function StoryViewer({
 
 
 
-    function endHold(){
+    function endHold(event){
 
+
+        if(
+
+            activePointerId.current === null ||
+
+            event.pointerId !== activePointerId.current
+
+        ){
+
+            return;
+
+        }
+
+
+        if(pendingHoldTimer.current !== null){
+
+            clearTimeout(pendingHoldTimer.current);
+
+            pendingHoldTimer.current = null;
+
+        }
+
+
+        if(!holdActive.current){
+
+            activePointerId.current = null;
+
+            holdOnNavigationArea.current = false;
+
+            return;
+
+        }
+
+
+        if(
+
+            holdOnNavigationArea.current &&
+
+            Date.now() - holdStartedAt.current >= 250
+
+        ){
+
+            suppressNavigationClick.current = true;
+
+        }
+
+
+        activePointerId.current = null;
+
+        holdOnNavigationArea.current = false;
+
+        holdActive.current = false;
 
         setHolding(false);
+
+
+        const shouldResumeVideo = resumeVideoAfterHold.current;
+
+        resumeVideoAfterHold.current = false;
+
+
+        if(shouldResumeVideo && videoRef.current){
+
+            videoRef.current.play().catch(()=>{});
+
+        }
 
 
     }
@@ -819,6 +1117,24 @@ export default function StoryViewer({
 
             }
 
+            onPointerDownCapture={startHold}
+
+            onPointerUpCapture={endHold}
+
+            onPointerCancelCapture={endHold}
+
+            onPointerLeave={(event)=>{
+
+                if(event.pointerType === "mouse"){
+
+                    endHold(event);
+
+                }
+
+            }}
+
+            onClickCapture={handleViewerClickCapture}
+
         >
                         <div className="story-bars">
 
@@ -1054,18 +1370,6 @@ export default function StoryViewer({
 
                 className="story-media-area"
 
-
-                onMouseDown={startHold}
-
-                onMouseUp={endHold}
-
-                onMouseLeave={endHold}
-
-
-                onTouchStart={startHold}
-
-                onTouchEnd={endHold}
-
             >
 
 
@@ -1083,6 +1387,8 @@ export default function StoryViewer({
 
                 <video
 
+                    ref={videoRef}
+
                     src={story.media_url}
 
                     className="story-content"
@@ -1090,6 +1396,16 @@ export default function StoryViewer({
                     autoPlay
 
                     playsInline
+
+                    onLoadedMetadata={syncVideoProgress}
+
+                    onDurationChange={syncVideoProgress}
+
+                    onTimeUpdate={syncVideoProgress}
+
+                    onPlay={handleVideoPlay}
+
+                    onEnded={handleVideoEnded}
 
                 />
 

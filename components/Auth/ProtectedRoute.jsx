@@ -71,7 +71,7 @@ export default function ProtectedRoute({children}){
                     display:"flex",
                     alignItems:"center",
                     justifyContent:"center",
-                    color:"#2563eb",
+                    color:"var(--primary)",
                     fontSize:"18px"
                 }}
             >

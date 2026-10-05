@@ -109,7 +109,7 @@
 
     align-items:center;
 
-    background:#000;
+    background:var(--media-background);
 
     overflow:hidden;
 
@@ -159,7 +159,7 @@
 
     align-items:center;
 
-    background:#000;
+    background:var(--media-background);
 
     width:fit-content;
 
@@ -224,10 +224,10 @@
 
     background:linear-gradient(
         transparent,
-        rgba(0,0,0,.8)
+        var(--overlay-80)
     );
 
-    color:white;
+    color:var(--white);
 
     transition:.3s;
 
@@ -259,7 +259,7 @@
 
     border:none;
 
-    color:white;
+    color:var(--white);
 
     cursor:pointer;
 
